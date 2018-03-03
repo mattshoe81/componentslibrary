@@ -81,9 +81,11 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
      */
     @Override
     public void add(T element) {
-        Node newNode = new Node(element);
-        this.rear.next = newNode;
         this.length++;
+        Node newNode = new Node(element);
+        newNode.next = null;
+        this.rear.next = newNode;
+        this.rear = newNode;
     }
 
     @Override
@@ -134,7 +136,8 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
     @Override
     public T focus() {
         Node focus = this.preFocus.next;
-        return focus.data;
+        T data = focus.data;
+        return data;
     }
 
     @Override
@@ -197,7 +200,7 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
 
     @Override
     public String toString() {
-        String result = "< ";
+        String result = "<";
         Node currentNode = this.preFront;
 
         for (int k = 0; k < this.length; k++) {
@@ -205,9 +208,11 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
             if (k != this.length - 1) {
                 result += currentNode.data.toString() + ", ";
             } else {
-                result += currentNode.data.toString() + " >";
+                result += currentNode.data.toString();
             }
         }
+
+        result += ">";
 
         return result;
     }
