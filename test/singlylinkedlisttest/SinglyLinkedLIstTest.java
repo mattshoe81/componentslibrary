@@ -45,10 +45,12 @@ public abstract class SinglyLinkedListTest {
     private String[] getContents(SinglyLinkedList<String> list) {
         String[] contents = new String[list.length()];
         list.moveToFront();
-        contents[0] = list.focus();
-        for (int k = 1; k < list.length(); k++) {
-            list.advance();
-            contents[k] = list.focus();
+        if (list.length() > 0) {
+            contents[0] = list.focus();
+            for (int k = 1; k < list.length(); k++) {
+                list.advance();
+                contents[k] = list.focus();
+            }
         }
 
         return contents;

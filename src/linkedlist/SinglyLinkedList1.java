@@ -6,6 +6,7 @@ package linkedlist;
 import java.lang.reflect.Constructor;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author Matthew Shoemaker
@@ -45,23 +46,24 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
     private class SinglyLinkedList1Iterator implements Iterator<T> {
 
         Node cursor;
-        Node rear;
 
         public SinglyLinkedList1Iterator() {
-            this.cursor = SinglyLinkedList1.this.preFront.next;
-            this.rear = SinglyLinkedList1.this.rear;
+            this.cursor = SinglyLinkedList1.this.preFront;
         }
 
         @Override
         public boolean hasNext() {
-            return this.cursor.next != this.rear;
+            return this.cursor.next != null;
         }
 
         @Override
         public T next() {
-            Node nextNode = this.cursor.next;
-            this.cursor = nextNode;
-            return this.cursor.data;
+            if (this.hasNext()) {
+                Node nextNode = this.cursor.next;
+                this.cursor = nextNode;
+                return this.cursor.data;
+            }
+            throw new NoSuchElementException();
         }
     }
 
@@ -173,7 +175,7 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public SinglyLinkedList<T> newInstance() {
+    public SinglyLinkedList1<T> newInstance() {
         try {
             Constructor<?> c = this.getClass().getConstructor(Comparator.class);
             return (SinglyLinkedList1<T>) c.newInstance();
@@ -181,77 +183,6 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
             throw new AssertionError(
                     "Cannot construct object of type " + this.getClass());
         }
-    }
-
-    /*
-     * *************************************************************************
-     * Secondary Methods
-     * *************************************************************************
-     */
-    @Override
-    public boolean equals(Object obj) {
-        boolean equals = true;
-        if (this.getClass().equals(obj.getClass())) {
-            equals = this.toString().equals(obj.toString());
-        }
-
-        return equals;
-    }
-
-    @Override
-    public String toString() {
-        String result = "<";
-        Node currentNode = this.preFront;
-
-        for (int k = 0; k < this.length; k++) {
-            currentNode = currentNode.next;
-            if (k != this.length - 1) {
-                result += currentNode.data.toString() + ", ";
-            } else {
-                result += currentNode.data.toString();
-            }
-        }
-
-        result += ">";
-
-        return result;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 0;
-        // Hmmm, interesting dilemma
-
-        return result;
-    }
-
-    @Override
-    public T removeFront() {
-        this.moveToFront();
-        T removeFront = this.remove();
-        return removeFront;
-    }
-
-    @Override
-    public T removeRear() {
-        this.moveToRear();
-        T rear = this.remove();
-        return rear;
-    }
-
-    @Override
-    public boolean contains(T element) {
-        boolean contains = false;
-        int k = 0;
-        this.moveToFront();
-        while (k < this.length() && !contains) {
-            if (this.focus().equals(element)) {
-                contains = true;
-            }
-            this.advance();
-        }
-
-        return contains;
     }
 
 }
