@@ -9,11 +9,6 @@ public abstract class SinglyLinkedListSecondary<T>
      * ************************************************************************
      */
 
-    /*
-     * Not quite sure what could be implemented in here? Tried, and things got
-     * pretty wonky.
-     */
-
     @Override
     public boolean equals(Object obj) {
         boolean equals = true;
