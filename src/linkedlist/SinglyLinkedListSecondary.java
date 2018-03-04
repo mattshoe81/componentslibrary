@@ -1,5 +1,14 @@
 package linkedlist;
 
+/**
+ * Abstract class providing the implementation of all of the layered secondary
+ * methods that were defined in the SinglyLinkedList interface, as well as the
+ * implementation for equals, toString, and hashCode methods.
+ *
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public abstract class SinglyLinkedListSecondary<T>
         implements SinglyLinkedList<T> {
 
@@ -48,6 +57,11 @@ public abstract class SinglyLinkedListSecondary<T>
         return result;
     }
 
+    /*
+     * ************************************************************************
+     * Secondary Methods
+     * ************************************************************************
+     */
     @Override
     public T removeFront() {
         this.moveToFront();

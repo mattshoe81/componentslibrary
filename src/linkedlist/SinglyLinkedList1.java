@@ -9,6 +9,30 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
+ * A non-layered implementation of a singly-linked list using a single sentinel
+ * {@code Node}.
+ *
+ * @convention <pre>
+ *      [$this.preFront is not null]
+ *      [$this.preFocus is not null]
+ *      [$this.rear is not null]
+ *      [$this.length >= 0]
+ *      [$this.position < length]
+ *      [$this.position >= 0]
+ *      [$this.position = 0 if $this.length = 0]
+ *      [$this.preFocus points to the node just before the
+ *          node containing the data that is in focus to
+ *          the client if ($this.length > 0) and points to
+ *          $this.preFront if $this.length = 0]
+ *      [$this.preFront points to the sentinel node]
+ *      [$this.rear points to the last node of $this]
+ *      [$this.length = total number of nodes minus 1 for the sentinel node]
+ *  </pre>
+ * @correspondence <pre>
+ *      this = [data in nodes from $this.preFront.next through $this.rear]
+ *      focus = [this.preFocus.next]
+ *  </pre>
+ *
  * @author Matthew Shoemaker
  *
  */
@@ -104,7 +128,12 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
     public T remove() {
         T focusData = this.preFocus.next.data;
         Node newNext = this.preFocus.next.next;
-        this.preFocus.next = newNext;
+        if (newNext != null) {
+            this.preFocus.next = newNext;
+        } else {
+            this.preFocus = this.preFront;
+        }
+
         this.length--;
 
         return focusData;
