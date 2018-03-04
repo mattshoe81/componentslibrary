@@ -5,7 +5,9 @@ import standard.Standard;
 public interface SinglyLInkedListKernel<T>
         extends Standard<SinglyLinkedList<T>> {
 
-    public void add(T object);
+    public void add(T element);
+
+    public void addToFront(T element);
 
     public T remove();
 
@@ -20,4 +22,6 @@ public interface SinglyLInkedListKernel<T>
     public T focus();
 
     public void moveToRear();
+
+    public int position();
 }

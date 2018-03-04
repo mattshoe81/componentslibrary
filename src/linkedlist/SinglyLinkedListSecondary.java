@@ -21,20 +21,21 @@ public abstract class SinglyLinkedListSecondary<T>
 
     @Override
     public String toString() {
+        int pos = this.position();
         String result = "<";
         this.moveToFront();
 
         int k = 0;
         for (T element : this) {
-            if (k == this.length()) {
+            if (k == this.length() - 1) {
                 result += element;
             } else {
                 result += element.toString() + ", ";
             }
-
+            k++;
         }
-
         result += ">";
+        this.moveToPosition(pos);
 
         return result;
     }
@@ -74,6 +75,21 @@ public abstract class SinglyLinkedListSecondary<T>
         }
 
         return contains;
+    }
+
+    @Override
+    public void moveToPosition(int pos) {
+        int currentPos = this.position();
+        if (currentPos <= pos) {
+            for (int k = currentPos; k < pos; k++) {
+                this.advance();
+            }
+        } else {
+            this.moveToFront();
+            for (int k = 0; k < pos; k++) {
+                this.advance();
+            }
+        }
     }
 
 }

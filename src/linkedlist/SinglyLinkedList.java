@@ -11,4 +11,6 @@ public interface SinglyLinkedList<T>
 
     public void retreat();
 
+    public void moveToPosition(int pos);
+
 }

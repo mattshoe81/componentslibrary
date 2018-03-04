@@ -35,12 +35,14 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
     private Node preFocus;
     private Node rear;
     private int length;
+    private int position;
 
     private void createNewRep() {
         this.preFront = new Node();
         this.preFocus = this.preFront;
         this.rear = this.preFront;
         this.length = 0;
+        this.position = 0;
     }
 
     private class SinglyLinkedList1Iterator implements Iterator<T> {
@@ -91,6 +93,14 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
     }
 
     @Override
+    public void addToFront(T element) {
+        Node newFront = new Node(element);
+        newFront.next = this.preFront.next;
+        this.preFront.next = newFront;
+        this.length++;
+    }
+
+    @Override
     public T remove() {
         T focusData = this.preFocus.next.data;
         Node newNext = this.preFocus.next.next;
@@ -104,6 +114,7 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
     public void advance() {
         Node next = this.preFocus.next;
         this.preFocus = next;
+        this.position++;
     }
 
     @Override
@@ -114,12 +125,13 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
             Node next = this.preFocus.next;
             this.preFocus = next;
         }
+        this.position--;
     }
 
     @Override
     public void moveToFront() {
         this.preFocus = this.preFront;
-
+        this.position = 0;
     }
 
     @Override
@@ -133,13 +145,14 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
         Node focus = this.preFocus.next;
         newNode.next = focus.next;
         focus.next = newNode;
+        this.length++;
     }
 
     @Override
     public T focus() {
         Node focus = this.preFocus.next;
-        T data = focus.data;
-        return data;
+        T focusData = focus.data;
+        return focusData;
     }
 
     @Override
@@ -147,6 +160,12 @@ public class SinglyLinkedList1<T> extends SinglyLinkedListSecondary<T> {
         while (this.preFocus.next != this.rear) {
             this.preFocus = this.preFocus.next;
         }
+        this.position = this.length - 1;
+    }
+
+    @Override
+    public int position() {
+        return this.position;
     }
 
     @Override
