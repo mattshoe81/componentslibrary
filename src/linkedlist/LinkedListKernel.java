@@ -3,17 +3,17 @@ package linkedlist;
 import standard.Standard;
 
 /**
- * {@code SinglyLinkedList} kernel component containing method headers and
+ * {@code LinkedList} kernel component containing method headers and
  * contracts for all methods that will directly interact with the underlying
- * {@code Node} variables of SinglyLinkedList. All sub-interface methods will
- * use only these methods to perform operations on the {@code SinglyLinkedList}.
+ * {@code Node} variables of LinkedList. All sub-interface methods will
+ * use only these methods to perform operations on the {@code LinkedList}.
  *
  * @author Matthew Shoemaker
  *
  * @param <T>
  */
-public interface SinglyLInkedListKernel<T>
-        extends Standard<SinglyLinkedList<T>> {
+public interface LinkedListKernel<T>
+        extends Standard<LinkedList<T>> {
 
     /**
      * Appends {@code element} to the end of #this.

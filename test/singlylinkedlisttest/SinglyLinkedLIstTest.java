@@ -7,11 +7,11 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
-import linkedlist.SinglyLinkedList;
+import linkedlist.LinkedList;
 
 public abstract class SinglyLinkedListTest {
 
-    protected abstract SinglyLinkedList<String> constructorTest();
+    protected abstract LinkedList<String> constructorTest();
 
     /*
      * ************************************************************************
@@ -19,8 +19,8 @@ public abstract class SinglyLinkedListTest {
      * ************************************************************************
      */
 
-    private SinglyLinkedList<String> createFromArgsTest(String... args) {
-        SinglyLinkedList<String> list = this.constructorTest();
+    private LinkedList<String> createFromArgsTest(String... args) {
+        LinkedList<String> list = this.constructorTest();
         for (String arg : args) {
             list.add(arg);
         }
@@ -43,7 +43,7 @@ public abstract class SinglyLinkedListTest {
         return list;
     }
 
-    private String[] getContents(SinglyLinkedList<String> list) {
+    private String[] getContents(LinkedList<String> list) {
         String[] contents = new String[list.length()];
         int position = list.position();
         list.moveToFront();
@@ -84,7 +84,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c");
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
         String addition = "d";
 
@@ -107,7 +107,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest();
+        LinkedList<String> test = this.createFromArgsTest();
         LinkedList<String> exp = this.createFromArgsRef();
         String addition = "d";
 
@@ -130,7 +130,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c");
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
         String addition = "a";
 
@@ -156,7 +156,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c");
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
         String addition = "x";
 
@@ -179,7 +179,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest();
+        LinkedList<String> test = this.createFromArgsTest();
         LinkedList<String> exp = this.createFromArgsRef();
         String addition = "x";
 
@@ -205,7 +205,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c");
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
         String testRemoval;
         String expRemoval;
@@ -230,7 +230,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c");
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
         String testRemoval;
         String expRemoval;
@@ -259,7 +259,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c");
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
         String testRemoval;
         String expRemoval;
@@ -288,7 +288,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -319,7 +319,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -352,7 +352,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -383,7 +383,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -410,7 +410,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest();
+        LinkedList<String> test = this.createFromArgsTest();
         LinkedList<String> exp = this.createFromArgsRef();
         int testLength;
         int expLength;
@@ -435,7 +435,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a");
+        LinkedList<String> test = this.createFromArgsTest("a");
         LinkedList<String> exp = this.createFromArgsRef("a");
         int testLength;
         int expLength;
@@ -463,7 +463,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -490,7 +490,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a");
+        LinkedList<String> test = this.createFromArgsTest("a");
         LinkedList<String> exp = this.createFromArgsRef("a");
         String insertion = "x";
         int position = 0;
@@ -518,7 +518,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -545,7 +545,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a");
+        LinkedList<String> test = this.createFromArgsTest("a");
         LinkedList<String> exp = this.createFromArgsRef("a");
         String testFocus;
         String expFocus = "a";
@@ -569,7 +569,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -599,7 +599,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
@@ -626,7 +626,7 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a");
+        LinkedList<String> test = this.createFromArgsTest("a");
         LinkedList<String> exp = this.createFromArgsRef("a");
         String rear = exp.peekLast();
 
@@ -655,9 +655,9 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test1 = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test1 = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
-        SinglyLinkedList<String> test2 = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test2 = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         boolean test;
         boolean expTest = true;
@@ -682,9 +682,9 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test1 = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test1 = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
-        SinglyLinkedList<String> test2 = this.createFromArgsTest("a", "b", "c");
+        LinkedList<String> test2 = this.createFromArgsTest("a", "b", "c");
         boolean test;
         boolean expTest = false;
 
@@ -704,8 +704,8 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test1 = this.createFromArgsTest();
-        SinglyLinkedList<String> test2 = this.createFromArgsTest();
+        LinkedList<String> test1 = this.createFromArgsTest();
+        LinkedList<String> test2 = this.createFromArgsTest();
         boolean test;
         boolean expTest = true;
 
@@ -725,8 +725,8 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test1 = this.createFromArgsTest("a");
-        SinglyLinkedList<String> test2 = this.createFromArgsTest("b");
+        LinkedList<String> test1 = this.createFromArgsTest("a");
+        LinkedList<String> test2 = this.createFromArgsTest("b");
         boolean test;
         boolean expTest = false;
 
@@ -749,9 +749,9 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
-        SinglyLinkedList<String> exp = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> exp = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         String testString;
         String expString = "<a, b, c, d, e, f, g>";
@@ -773,9 +773,9 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
-        SinglyLinkedList<String> exp = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> exp = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         String testString;
         String expString = "<a, b, c, d, e, f, g>";
@@ -803,9 +803,9 @@ public abstract class SinglyLinkedListTest {
         /*
          * Set up variables
          */
-        SinglyLinkedList<String> test = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> test = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
-        SinglyLinkedList<String> exp = this.createFromArgsTest("a", "b", "c",
+        LinkedList<String> exp = this.createFromArgsTest("a", "b", "c",
                 "d", "e", "f", "g");
         String testString;
         String expString = "<a, b, c, d, e, f, g>";

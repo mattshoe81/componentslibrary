@@ -1,13 +1,13 @@
 package singlylinkedlisttest;
 
+import linkedlist.LinkedList;
 import linkedlist.SinglyLinkedList;
-import linkedlist.SinglyLinkedList1;
 
 public class SinglyLinkedList1Test extends SinglyLinkedListTest {
 
     @Override
-    protected SinglyLinkedList<String> constructorTest() {
-        return new SinglyLinkedList1<String>();
+    protected LinkedList<String> constructorTest() {
+        return new SinglyLinkedList<String>();
     }
 
 }
