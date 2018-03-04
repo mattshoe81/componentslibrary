@@ -21,7 +21,7 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
      * @ensures removeFront = [the first element of #this] and this = #this /
      *          front
      */
-    public T removeFront();
+    T removeFront();
 
     /**
      * Removes and returns the final element in {@code this}.
@@ -32,7 +32,7 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
      * @ensures removeFront = [the final element of #this] and this = #this /
      *          rear
      */
-    public T removeRear();
+    T removeRear();
 
     /**
      * Reports whether {@code this} contains {@code element}.
@@ -42,15 +42,15 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
      * @return boolean as to whether {@code this} contains {@code element}
      * @ensures contains = [element is in #this]
      */
-    public boolean contains(T element);
+    boolean contains(T element);
 
     /**
      * Shifts {@code this.focus} to the element previous to {@code #this.focus}.
      *
-     * @requires 1 < this.length
+     * @requires [#this.position > 0]
      * @ensures this.focus = #this.focus - 1
      */
-    public void retreat();
+    void retreat();
 
     /**
      * Shifts {@code this.focus} to the ({@code pos} + 1)th element in
@@ -66,6 +66,6 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
      * @ensures this.position = pos
      *
      */
-    public void moveToPosition(int pos);
+    void moveToPosition(int pos);
 
 }

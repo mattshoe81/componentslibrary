@@ -166,6 +166,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
      */
     @Override
     public void add(T element) {
+        assert element != null : "Violation of: element is not null";
+
         this.length++;
         Node newNode = new Node(element);
         newNode.next = null;
@@ -175,6 +177,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public void addToFront(T element) {
+        assert this.length > 0 : "Violation of: 0 < #this.length";
+
         Node newFront = new Node(element);
         newFront.next = this.preFront.next;
         this.preFront.next = newFront;
@@ -183,6 +187,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public T remove() {
+        assert this.length > 0 : "Violation of: 0 <= this.length";
+
         T focusData = this.preFocus.next.data;
         Node newNext = this.preFocus.next.next;
         if (newNext != null) {
@@ -198,20 +204,12 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public void advance() {
+        assert this.position != this.length
+                - 1 : "Violation of: #this.focus is not the last element in the list";
+
         Node next = this.preFocus.next;
         this.preFocus = next;
         this.position++;
-    }
-
-    @Override
-    public void retreat() {
-        Node preFocusOriginal = this.preFocus;
-        this.preFocus = this.preFront;
-        while (this.preFocus.next != preFocusOriginal) {
-            Node next = this.preFocus.next;
-            this.preFocus = next;
-        }
-        this.position--;
     }
 
     @Override
@@ -236,6 +234,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public T focus() {
+        assert this.length > 0 : "Violation of: 0 <= this.length";
+
         Node focus = this.preFocus.next;
         T focusData = focus.data;
         return focusData;
@@ -243,6 +243,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public void moveToRear() {
+        assert this.length > 0 : "Violation of: 0 <= this.length";
+
         while (this.preFocus.next != this.rear) {
             this.preFocus = this.preFocus.next;
         }
@@ -251,6 +253,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public int position() {
+        assert this.length > 0 : "Violation of: 0 <= this.length";
+
         return this.position;
     }
 

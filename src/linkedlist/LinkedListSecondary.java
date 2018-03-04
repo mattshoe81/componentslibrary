@@ -9,8 +9,7 @@ package linkedlist;
  *
  * @param <T>
  */
-public abstract class LinkedListSecondary<T>
-        implements LinkedList<T> {
+public abstract class LinkedListSecondary<T> implements LinkedList<T> {
 
     /*
      * ************************************************************************
@@ -64,6 +63,8 @@ public abstract class LinkedListSecondary<T>
      */
     @Override
     public T removeFront() {
+        assert this.length() > 0 : "Violation of: 0 <= this.length";
+
         this.moveToFront();
         T removeFront = this.remove();
         return removeFront;
@@ -71,6 +72,8 @@ public abstract class LinkedListSecondary<T>
 
     @Override
     public T removeRear() {
+        assert this.length() > 0 : "Violation of: 0 <= this.length";
+
         this.moveToRear();
         T rear = this.remove();
         return rear;
@@ -92,7 +95,17 @@ public abstract class LinkedListSecondary<T>
     }
 
     @Override
+    public void retreat() {
+        assert this.position() > 0 : "Violation of: this.position > 0";
+
+        this.moveToPosition(this.position() - 1);
+    }
+
+    @Override
     public void moveToPosition(int pos) {
+        assert pos >= 0 : "Violation of: pos >= 0";
+        assert pos < this.length() : "Violation of: pos < this.length";
+
         int currentPos = this.position();
         if (currentPos <= pos) {
             for (int k = currentPos; k < pos; k++) {
