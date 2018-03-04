@@ -3,17 +3,16 @@ package linkedlist;
 import standard.Standard;
 
 /**
- * {@code LinkedList} kernel component containing method headers and
- * contracts for all methods that will directly interact with the underlying
- * {@code Node} variables of LinkedList. All sub-interface methods will
- * use only these methods to perform operations on the {@code LinkedList}.
+ * {@code LinkedList} kernel component containing method headers and contracts
+ * for all methods that will directly interact with the underlying {@code Node}
+ * variables of LinkedList. All sub-interface methods will use only these
+ * methods to perform operations on the {@code LinkedList}.
  *
  * @author Matthew Shoemaker
  *
  * @param <T>
  */
-public interface LinkedListKernel<T>
-        extends Standard<LinkedList<T>> {
+public interface LinkedListKernel<T> extends Standard<LinkedList<T>> {
 
     /**
      * Appends {@code element} to the end of #this.
@@ -38,31 +37,31 @@ public interface LinkedListKernel<T>
     public void addToFront(T element);
 
     /**
-     * Removes {@code focus} from {@code this} and returns it to the caller. The
-     * new focus will be shifted to the right, and if the original focus was the
-     * last element, then the focus shifts to the first element in
-     * {@code #this}.
+     * Removes {@code this.focus} and returns it to the caller.
+     * {@code this.focus} will be shifted to the right, and if
+     * {@code #this.focus} was the last element, then {@code this.focus} shifts
+     * to the first element in {@code #this}.
      *
      *
-     * @return the {@code focus} of {@code this}
+     * @return {@code #this.focus}
      *
      * @updates this
-     * @requires 0 < this.length
+     * @requires 0 < #this.length
      * @ensures remove = #this.focus and if #this.focus is the final element in
      *          the list, this.focus will be the first element in the array.
      */
     public T remove();
 
     /**
-     * Advances the {@code focus} of {@code this} forward by 1 position.
+     * Shifts {@code #this.focus} forward by 1 position.
      *
      * @requires #this.focus is not the last element in the list
-     * @ensures this.focus = #this.focus + 1
+     * @ensures this.focus = #this.focus.next
      */
     public void advance();
 
     /**
-     * Shifts {@code focus} to the front of the list.
+     * Shifts {@code this.focus} to the front of the list.
      *
      * @requires 0 < length
      * @ensures this.focus is the first element of the list
@@ -79,23 +78,23 @@ public interface LinkedListKernel<T>
     public int length();
 
     /**
-     * Inserts {@code element} into {#this} at the position directly following
-     * the current {@code focus} of {@code this}.
+     * Inserts {@code element} into {@code #this} at the position directly
+     * following the {@code #this.focus}.
      *
      * @param element
+     *            element to be inserted into the list
      *
      * @updates this
-     * @ensures element is inserted at the next position in the list directly
-     *          following this.focus.
+     * @ensures this = [(elements before #this.focus) * #this.focus * element *
+     *          (elements after #this.focus)] and [this.focus = #this.focus]
      *
      */
     public void insert(T element);
 
     /**
-     * Returns a reference to the element in {@code this} that currently holds
-     * the {@code focus}.
+     * Returns a reference to {@code #this.focus}.
      *
-     * @return {@code this.focus}
+     * @return {@code #this.focus}
      *
      * @requires 0 < this.length
      * @ensures this = #this and focus = #this.focus
@@ -103,8 +102,7 @@ public interface LinkedListKernel<T>
     public T focus();
 
     /**
-     * Moves the current {@code focus} of {@code this} to the last element in
-     * {@code this}.
+     * Moves {@code #this.focus} to the last element in {@code this}.
      *
      * @requires 0 < this.length
      * @ensures this.focus = final element in this
@@ -112,9 +110,9 @@ public interface LinkedListKernel<T>
     public void moveToRear();
 
     /**
-     * Returns the position of {@code focus} in {@code this}
+     * Returns the position of {@code #this.focus}.
      *
-     * @return the index position of {@code focus} int {@code this}
+     * @return the index position of {@code this.focus}
      *
      * @requires 0 < this.length
      * @ensures position = [the index position of the current element in this

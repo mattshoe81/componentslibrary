@@ -20,6 +20,7 @@ import java.util.NoSuchElementException;
  *      [$this.position < length]
  *      [$this.position >= 0]
  *      [$this.position = 0 if $this.length = 0]
+ *      [$this.position = distance of this.focus from $this.preFront]
  *      [$this.preFocus points to the node just before the
  *          node containing the data that is in focus to
  *          the client if ($this.length > 0) and points to
@@ -35,32 +36,75 @@ import java.util.NoSuchElementException;
  *
  * @author Matthew Shoemaker
  *
+ * @param <T>
+ *            the generic type of {@code this}
+ *
  */
 public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     /*
      * Private Members
      */
+    /**
+     * Node class for singly linked list.
+     *
+     */
     private class Node {
+        /**
+         * The data stored in the node.
+         */
         T data;
+        /**
+         * The reference to the next node in the list. Null if final node.
+         */
         Node next;
 
-        public Node() {
+        /**
+         * No-arg constructor initializes data and next to null.
+         */
+        Node() {
             this.data = null;
             this.next = null;
         }
 
-        public Node(T data) {
+        /**
+         * Constructor that accept the data value for the node.
+         *
+         * @param data
+         *            this.data
+         */
+        Node(T data) {
             this.data = data;
         }
     }
 
+    /**
+     * Sentinel node for {@code this}.
+     */
     private Node preFront;
+    /**
+     * stores the reference to the value just before this.focus.
+     *
+     * [this.focus = $this.preFocus.next]
+     */
     private Node preFocus;
+    /**
+     * Reference to the final entry in this.
+     */
     private Node rear;
+    /**
+     * Number of nodes, besides the sentinel node, in this.
+     */
     private int length;
+    /**
+     * the distance of the focus from {@code this.preFront}.
+     */
     private int position;
 
+    /**
+     * Single point of control over change for the construction of a new data
+     * representation. Initializes this to its initial value.
+     */
     private void createNewRep() {
         this.preFront = new Node();
         this.preFocus = this.preFront;
@@ -69,11 +113,21 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
         this.position = 0;
     }
 
+    /**
+     * Iterator class for {@code this}.
+     *
+     */
     private class SinglyLinkedList1Iterator implements Iterator<T> {
 
-        Node cursor;
+        /**
+         * Reference to the current value in the iteration.
+         */
+        private Node cursor;
 
-        public SinglyLinkedList1Iterator() {
+        /**
+         * Constructor to initialize the cursor to the front of this list.
+         */
+        SinglyLinkedList1Iterator() {
             this.cursor = SinglyLinkedList.this.preFront;
         }
 
@@ -98,7 +152,10 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
      * Constructor
      * *************************************************************************
      */
-    public SinglyLinkedList() {
+    /**
+     * No-arg constructor for {@code this}.
+     */
+    SinglyLinkedList() {
         this.createNewRep();
     }
 

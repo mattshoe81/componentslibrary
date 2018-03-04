@@ -10,8 +10,7 @@ package linkedlist;
  *
  * @param <T>
  */
-public interface LinkedList<T>
-        extends LinkedListKernel<T>, Iterable<T> {
+public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
 
     /**
      * Removes and returns the first element in {@code this}.
@@ -46,8 +45,7 @@ public interface LinkedList<T>
     public boolean contains(T element);
 
     /**
-     * Shifts the {@code focus} of {@code this} to the element previous to
-     * {@code #focus}.
+     * Shifts {@code this.focus} to the element previous to {@code #this.focus}.
      *
      * @requires 1 < this.length
      * @ensures this.focus = #this.focus - 1
@@ -55,13 +53,16 @@ public interface LinkedList<T>
     public void retreat();
 
     /**
-     * Shifts the {@code focus} of {@code this} to the ({@code pos} + 1)th
-     * element in {@code this}. A linked list has no index value, but this can
-     * be essentially thought of as an index value in the most simple terms.
+     * Shifts {@code this.focus} to the ({@code pos} + 1)th element in
+     * {@code this}. A linked list has no index value, but this can be
+     * essentially thought of as a tool for index value in the most simple
+     * terms.
      *
      * @param pos
      *            position to which the {@code focus} will shift
-     * @requires pos < this.length and 0 <= pos
+     * @requires <pre>
+     *          pos < this.length and 0 <= pos
+     *          </pre>
      * @ensures this.position = pos
      *
      */
