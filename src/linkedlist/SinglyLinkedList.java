@@ -155,7 +155,7 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
     /**
      * No-arg constructor for {@code this}.
      */
-    SinglyLinkedList() {
+    public SinglyLinkedList() {
         this.createNewRep();
     }
 
@@ -177,7 +177,6 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public void addToFront(T element) {
-        assert this.length > 0 : "Violation of: 0 < #this.length";
 
         Node newFront = new Node(element);
         newFront.next = this.preFront.next;
@@ -197,6 +196,10 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
             this.preFocus = this.preFront;
         }
 
+        if (this.position == this.length - 1) {
+            this.position--;
+        }
+
         this.length--;
 
         return focusData;
@@ -210,6 +213,18 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
         Node next = this.preFocus.next;
         this.preFocus = next;
         this.position++;
+    }
+
+    @Override
+    public void retreat() {
+        assert this.position() > 0 : "Violation of: this.position > 0";
+
+        int originalPosition = this.position;
+        Node cursor = this.preFront;
+        for (int k = 0; k < originalPosition; k++) {
+            Node next = cursor.next;
+            cursor = next;
+        }
     }
 
     @Override

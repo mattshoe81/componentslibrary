@@ -63,6 +63,14 @@ public interface LinkedListKernel<T> extends Standard<LinkedList<T>> {
     void advance();
 
     /**
+     * Shifts {@code this.focus} to the element previous to {@code #this.focus}.
+     *
+     * @requires [#this.position > 0]
+     * @ensures this.position = #this.position - 1
+     */
+    void retreat();
+
+    /**
      * Shifts {@code this.focus} to the front of the list.
      *
      * @ensures this.focus is the first element of the list

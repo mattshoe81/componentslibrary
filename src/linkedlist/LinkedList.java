@@ -45,14 +45,6 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
     boolean contains(T element);
 
     /**
-     * Shifts {@code this.focus} to the element previous to {@code #this.focus}.
-     *
-     * @requires [#this.position > 0]
-     * @ensures this.focus = #this.focus - 1
-     */
-    void retreat();
-
-    /**
      * Shifts {@code this.focus} to the ({@code pos} + 1)th element in
      * {@code this}. A linked list has no index value, but this can be
      * essentially thought of as a tool for index value in the most simple

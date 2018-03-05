@@ -19,8 +19,9 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
 
     @Override
     public boolean equals(Object obj) {
-        boolean equals = true;
+        boolean equals = false;
         if (this.getClass().equals(obj.getClass())) {
+
             equals = this.toString().equals(obj.toString());
         }
 
@@ -29,21 +30,23 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
 
     @Override
     public String toString() {
-        int pos = this.position();
         String result = "<";
-        this.moveToFront();
-
-        int k = 0;
-        for (T element : this) {
-            if (k == this.length() - 1) {
-                result += element;
-            } else {
-                result += element.toString() + ", ";
+        if (this.length() > 0) {
+            int pos = this.position();
+            this.moveToFront();
+            int k = 0;
+            for (T element : this) {
+                if (k == this.length() - 1) {
+                    result += element;
+                } else {
+                    result += element.toString() + ", ";
+                }
+                this.moveToPosition(pos);
+                k++;
             }
-            k++;
         }
+
         result += ">";
-        this.moveToPosition(pos);
 
         return result;
     }
@@ -92,13 +95,6 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
         }
 
         return contains;
-    }
-
-    @Override
-    public void retreat() {
-        assert this.position() > 0 : "Violation of: this.position > 0";
-
-        this.moveToPosition(this.position() - 1);
     }
 
     @Override
