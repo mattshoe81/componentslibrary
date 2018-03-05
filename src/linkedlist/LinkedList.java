@@ -2,9 +2,9 @@ package linkedlist;
 
 /**
  * Additional functionality upon the bare-bones functionality afforded by the
- * {@code SinglyLinkedListKernel} interface. All method implementations must, by
- * design, use only the SinglyLinkedListKernel methods to perform operations on
- * the component.
+ * {@code LinkedListKernel} interface. All method implementations must, by
+ * design, use only the LinkedListKernel methods to perform operations on the
+ * component.
  *
  * @author Matthew Shoemaker
  *
@@ -13,39 +13,38 @@ package linkedlist;
 public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
 
     /**
-     * Removes and returns the first element in {@code this}.
+     * Removes and returns the first entry in {@code this}.
      *
-     * @return the first element in {@code this}
+     * @return the first entry in {@code this}
      * @updates this
      * @requires 0 < this.length
-     * @ensures removeFront = [the first element of #this] and this = #this /
+     * @ensures removeFront = [the first entry of #this] and this = #this /
      *          front
      */
     T removeFront();
 
     /**
-     * Removes and returns the final element in {@code this}.
+     * Removes and returns the final entry in {@code this}.
      *
-     * @return the final element in {@code this}
+     * @return the final entry in {@code this}
      * @updates this
      * @requires 0 < this.length
-     * @ensures removeFront = [the final element of #this] and this = #this /
-     *          rear
+     * @ensures removeFront = [the final entry of #this] and this = #this / rear
      */
     T removeRear();
 
     /**
-     * Reports whether {@code this} contains {@code element}.
+     * Reports whether {@code this} contains {@code entry}.
      *
-     * @param element
-     *            element to check for in {@code this}
-     * @return boolean as to whether {@code this} contains {@code element}
-     * @ensures contains = [element is in #this]
+     * @param entry
+     *            entry to check for in {@code this}
+     * @return boolean as to whether {@code this} contains {@code entry}
+     * @ensures contains = [entry is in #this]
      */
-    boolean contains(T element);
+    boolean contains(T entry);
 
     /**
-     * Shifts {@code this.focus} to the ({@code pos} + 1)th element in
+     * Shifts {@code this.focus} to the ({@code pos} + 1)th entry in
      * {@code this}. A linked list has no index value, but this can be
      * essentially thought of as a tool for index value in the most simple
      * terms.

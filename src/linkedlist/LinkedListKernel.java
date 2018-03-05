@@ -15,55 +15,55 @@ import standard.Standard;
 public interface LinkedListKernel<T> extends Standard<LinkedList<T>> {
 
     /**
-     * Appends {@code element} to the end of #this.
+     * Appends {@code entry} to the end of #this.
      *
-     * @param element
+     * @param entry
      *            item to be appended to {@code this}
      *
      * @updates this
-     * @requires element != null
-     * @ensures this = #this * element
+     * @requires entry != null
+     * @ensures this = #this * entry
      */
-    void add(T element);
+    void add(T entry);
 
     /**
-     * Adds {@code element} to the front of #this.
+     * Adds {@code entry} to the front of #this.
      *
-     * @param element
+     * @param entry
      *            item to be prepended to {@code this}
      *
      * @updates this
      * @requires 0 < #this.length
-     * @ensures this = element * #this
+     * @ensures this = entry * #this
      */
-    void addToFront(T element);
+    void addToFront(T entry);
 
     /**
      * Removes {@code this.focus} and returns it to the caller.
      * {@code this.focus} will be shifted to the right, and if
-     * {@code #this.focus} was the last element, then {@code this.focus} shifts
-     * to the first element in {@code #this}.
+     * {@code #this.focus} was the last entry, then {@code this.focus} shifts to
+     * the first entry in {@code #this}.
      *
      *
      * @return {@code #this.focus}
      *
      * @updates this
      * @requires 0 < #this.length
-     * @ensures remove = #this.focus and if #this.focus is the final element in
-     *          the list, this.focus will be the first element in the array.
+     * @ensures remove = #this.focus and if #this.focus is the final entry in
+     *          the list, this.focus will be the first entry in the array.
      */
     T remove();
 
     /**
      * Shifts {@code #this.focus} forward by 1 position.
      *
-     * @requires #this.focus is not the last element in the list
+     * @requires #this.focus is not the last entry in the list
      * @ensures this.focus = #this.focus.next
      */
     void advance();
 
     /**
-     * Shifts {@code this.focus} to the element previous to {@code #this.focus}.
+     * Shifts {@code this.focus} to the entry previous to {@code #this.focus}.
      *
      * @requires [#this.position > 0]
      * @ensures this.position = #this.position - 1
@@ -73,32 +73,32 @@ public interface LinkedListKernel<T> extends Standard<LinkedList<T>> {
     /**
      * Shifts {@code this.focus} to the front of the list.
      *
-     * @ensures this.focus is the first element of the list
+     * @ensures this.focus is the first entry of the list
      */
     void moveToFront();
 
     /**
-     * Returns the number of elements in {@code this}.
+     * Returns the number of entries in {@code this}.
      *
-     * @return the number of element of {@code this}
+     * @return the number of entry of {@code this}
      *
      * @ensures length = |this|
      */
     int length();
 
     /**
-     * Inserts {@code element} into {@code #this} at the position directly
+     * Inserts {@code entry} into {@code #this} at the position directly
      * following the {@code #this.focus}.
      *
-     * @param element
-     *            element to be inserted into the list
+     * @param entry
+     *            entry to be inserted into the list
      *
      * @updates this
-     * @ensures this = [(elements before #this.focus) * #this.focus * element *
-     *          (elements after #this.focus)] and [this.focus = #this.focus]
+     * @ensures this = [(entries before #this.focus) * #this.focus * entry *
+     *          (entries after #this.focus)] and [this.focus = #this.focus]
      *
      */
-    void insert(T element);
+    void insert(T entry);
 
     /**
      * Returns a reference to {@code #this.focus}.
@@ -111,10 +111,10 @@ public interface LinkedListKernel<T> extends Standard<LinkedList<T>> {
     T focus();
 
     /**
-     * Moves {@code #this.focus} to the last element in {@code this}.
+     * Moves {@code #this.focus} to the last entry in {@code this}.
      *
      * @requires 0 < this.length
-     * @ensures this.focus = final element in this
+     * @ensures this.focus = final entry in this
      */
     void moveToRear();
 
@@ -124,7 +124,7 @@ public interface LinkedListKernel<T> extends Standard<LinkedList<T>> {
      * @return the distance of {@code this.focus} fron the front of the list
      *
      * @requires 0 < this.length
-     * @ensures position = [the distance of the focus from the first element in
+     * @ensures position = [the distance of the focus from the first entry in
      *          the list]
      */
     int position();

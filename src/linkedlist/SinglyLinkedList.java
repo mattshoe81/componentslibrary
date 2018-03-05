@@ -165,20 +165,20 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
      * *************************************************************************
      */
     @Override
-    public void add(T element) {
-        assert element != null : "Violation of: element is not null";
+    public void add(T entry) {
+        assert entry != null : "Violation of: entry is not null";
 
         this.length++;
-        Node newNode = new Node(element);
+        Node newNode = new Node(entry);
         newNode.next = null;
         this.rear.next = newNode;
         this.rear = newNode;
     }
 
     @Override
-    public void addToFront(T element) {
+    public void addToFront(T entry) {
 
-        Node newFront = new Node(element);
+        Node newFront = new Node(entry);
         newFront.next = this.preFront.next;
         this.preFront.next = newFront;
         this.length++;
@@ -208,7 +208,7 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
     @Override
     public void advance() {
         assert this.position != this.length
-                - 1 : "Violation of: #this.focus is not the last element in the list";
+                - 1 : "Violation of: #this.focus is not the last entry in the list";
 
         Node next = this.preFocus.next;
         this.preFocus = next;
@@ -239,8 +239,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
     }
 
     @Override
-    public void insert(T element) {
-        Node newNode = new Node(element);
+    public void insert(T entry) {
+        Node newNode = new Node(entry);
         Node focus = this.preFocus.next;
         newNode.next = focus.next;
         focus.next = newNode;

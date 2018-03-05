@@ -35,11 +35,11 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
             int pos = this.position();
             this.moveToFront();
             int k = 0;
-            for (T element : this) {
+            for (T entry : this) {
                 if (k == this.length() - 1) {
-                    result += element;
+                    result += entry;
                 } else {
-                    result += element.toString() + ", ";
+                    result += entry.toString() + ", ";
                 }
                 this.moveToPosition(pos);
                 k++;
@@ -83,12 +83,12 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
     }
 
     @Override
-    public boolean contains(T element) {
+    public boolean contains(T entry) {
         boolean contains = false;
         int k = 0;
         this.moveToFront();
         while (k < this.length() && !contains) {
-            if (this.focus().equals(element)) {
+            if (this.focus().equals(entry)) {
                 contains = true;
             }
             this.advance();
