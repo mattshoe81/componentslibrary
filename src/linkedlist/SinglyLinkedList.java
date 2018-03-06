@@ -196,7 +196,7 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
             this.preFocus = this.preFront;
         }
 
-        if (this.position == this.length - 1) {
+        if (this.position == this.length - 1 && this.position != 0) {
             this.position--;
         }
 
@@ -207,8 +207,7 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public void advance() {
-        assert this.position != this.length
-                - 1 : "Violation of: #this.focus is not the last entry in the list";
+        assert this.position < this.length : "Violation of: #this.position < #this.length";
 
         Node next = this.preFocus.next;
         this.preFocus = next;
@@ -268,7 +267,6 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public int position() {
-        assert this.length > 0 : "Violation of: 0 <= this.length";
 
         return this.position;
     }

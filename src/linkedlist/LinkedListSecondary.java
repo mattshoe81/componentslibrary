@@ -66,10 +66,15 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
      */
     @Override
     public T removeFront() {
-        assert this.length() > 0 : "Violation of: 0 <= this.length";
+        assert this.length() > 0 : "Violation of: 0 < this.length";
 
+        int position = this.position();
         this.moveToFront();
         T removeFront = this.remove();
+        if (this.length() > 0) {
+            this.moveToPosition(position - 1);
+        }
+
         return removeFront;
     }
 

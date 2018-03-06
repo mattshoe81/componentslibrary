@@ -17,10 +17,21 @@ public abstract class LinkedListTest {
      * ************************************************************************
      */
 
-    private linkedlist.LinkedList<String> createFromArgsTest(String... args) {
+    private linkedlist.LinkedList<String> createFromArgsTest(int position,
+            String... args) {
+        if (args.length > 0) {
+            assert position < args.length : "Position must be valid index";
+        } else {
+            assert position == 0 : "Position must be zero if length is zero";
+        }
+
         linkedlist.LinkedList<String> list = this.constructorTest();
         for (String arg : args) {
             list.add(arg);
+        }
+
+        for (int k = 0; k < position; k++) {
+            list.advance();
         }
 
         return list;
@@ -79,16 +90,18 @@ public abstract class LinkedListTest {
      */
 
     /*
-     * add Method Test Cases
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / add Method Test Cases
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void addTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
         String addition = "d";
 
         /*
@@ -110,7 +123,7 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest();
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0);
         LinkedList<String> exp = this.createFromArgsRef();
         String addition = "d";
 
@@ -129,13 +142,62 @@ public abstract class LinkedListTest {
     }
 
     @Test
-    public void addTest_duplicate() {
+    public void addTest_nonZeroPosition() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(3, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String addition = "a";
+
+        /*
+         * Call method under test
+         */
+        test.add(addition);
+        exp.add(addition);
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+    }
+
+    @Test
+    public void addTest_finalPosition() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(6, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String addition = "a";
+
+        /*
+         * Call method under test
+         */
+        test.add(addition);
+        exp.add(addition);
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+    }
+
+    @Test
+    public void addTest_singleEntry() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0, "a");
+        LinkedList<String> exp = this.createFromArgsRef("a");
         String addition = "a";
 
         /*
@@ -153,16 +215,18 @@ public abstract class LinkedListTest {
     }
 
     /*
-     * addToFront Method Tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / addToFront Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void addToFrontTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(3, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
         String addition = "x";
 
         /*
@@ -184,7 +248,7 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest();
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0);
         LinkedList<String> exp = this.createFromArgsRef();
         String addition = "x";
 
@@ -202,17 +266,95 @@ public abstract class LinkedListTest {
         assertArrayEquals(expContents, testContents);
     }
 
+    @Test
+    public void addToFrontTest_nonZeroPosition() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(3, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String addition = "x";
+
+        /*
+         * Call method under test
+         */
+        test.addToFront(addition);
+        exp.addFirst(addition);
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+    }
+
+    @Test
+    public void addToFrontTest_finalPosition() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(3, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String addition = "x";
+
+        /*
+         * Call method under test
+         */
+        test.addToFront(addition);
+        exp.addFirst(addition);
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+    }
+
+    @Test
+    public void addToFrontTest_frontPosition() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String addition = "x";
+
+        /*
+         * Call method under test
+         */
+        test.addToFront(addition);
+        exp.addFirst(addition);
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+    }
+
     /*
-     * remove Method Tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / remove Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void removeTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
         String testRemoval;
         String expRemoval;
 
@@ -220,7 +362,7 @@ public abstract class LinkedListTest {
          * Call method under test
          */
         testRemoval = test.remove();
-        expRemoval = exp.remove();
+        expRemoval = exp.remove(position);
 
         /*
          * Compare contents of lists
@@ -232,25 +374,23 @@ public abstract class LinkedListTest {
     }
 
     @Test
-    public void removeTest_middle() {
+    public void removeTest_front() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
         String testRemoval;
         String expRemoval;
-        int advanceCount = 1;
-        for (int k = 0; k < advanceCount; k++) {
-            test.advance();
-        }
 
         /*
          * Call method under test
          */
         testRemoval = test.remove();
-        expRemoval = exp.remove(advanceCount);
+        expRemoval = exp.remove(position);
 
         /*
          * Compare contents of lists
@@ -266,21 +406,19 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c");
+        int position = 6;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
         String testRemoval;
         String expRemoval;
-        int advanceCount = 2;
-        for (int k = 0; k < advanceCount; k++) {
-            test.advance();
-        }
 
         /*
          * Call method under test
          */
         testRemoval = test.remove();
-        expRemoval = exp.removeLast();
+        expRemoval = exp.remove(position);
 
         /*
          * Compare contents of lists
@@ -292,26 +430,22 @@ public abstract class LinkedListTest {
     }
 
     @Test
-    public void removeTest_middleNonTrivial() {
+    public void removeTest_toEmpty() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
-                "f", "g");
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a");
+        LinkedList<String> exp = this.createFromArgsRef("a");
         String testRemoval;
         String expRemoval;
-        int advanceCount = 4;
-        for (int k = 0; k < advanceCount; k++) {
-            test.advance();
-        }
 
         /*
          * Call method under test
          */
         testRemoval = test.remove();
-        expRemoval = exp.remove(advanceCount);
+        expRemoval = exp.remove(position);
 
         /*
          * Compare contents of lists
@@ -323,26 +457,50 @@ public abstract class LinkedListTest {
     }
 
     @Test
-    public void removeTest_endNonTrivial() {
+    public void removeTest_toSingleEntryFront() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
-        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
-                "f", "g");
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b");
         String testRemoval;
         String expRemoval;
-        int advanceCount = 6;
-        for (int k = 0; k < advanceCount; k++) {
-            test.advance();
-        }
 
         /*
          * Call method under test
          */
         testRemoval = test.remove();
-        expRemoval = exp.removeLast();
+        expRemoval = exp.remove(position);
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expRemoval, testRemoval);
+    }
+
+    @Test
+    public void removeTest_toSingleEntryBack() {
+        /*
+         * Set up variables
+         */
+        int position = 1;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b");
+        String testRemoval;
+        String expRemoval;
+
+        /*
+         * Call method under test
+         */
+        testRemoval = test.remove();
+        expRemoval = exp.remove(position);
+
         /*
          * Compare contents of lists
          */
@@ -353,21 +511,111 @@ public abstract class LinkedListTest {
     }
 
     /*
-     * moveToFront Method Tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / moveToFront Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void moveToFrontTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(3, "a",
+                "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
-        int advanceCount = 4;
-        for (int k = 0; k < advanceCount; k++) {
-            test.advance();
-        }
+
+        /*
+         * Call method under test
+         */
+        test.moveToFront();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(exp.peekFirst(), test.focus());
+    }
+
+    @Test
+    public void moveToFrontTest_alreadyFront() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+
+        /*
+         * Call method under test
+         */
+        test.moveToFront();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(exp.peekFirst(), test.focus());
+    }
+
+    @Test
+    public void moveToFrontTest_boundary() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0, "a");
+        LinkedList<String> exp = this.createFromArgsRef("a");
+
+        /*
+         * Call method under test
+         */
+        test.moveToFront();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(exp.peekFirst(), test.focus());
+    }
+
+    @Test
+    public void moveToFrontTest_boundaryPlusOne() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(1, "a",
+                "b");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b");
+
+        /*
+         * Call method under test
+         */
+        test.moveToFront();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(exp.peekFirst(), test.focus());
+    }
+
+    @Test
+    public void moveToFrontTest_rear() {
+        /*
+         * Set up variables
+         */
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(6, "a",
+                "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
 
         /*
          * Call method under test
@@ -384,15 +632,16 @@ public abstract class LinkedListTest {
     }
 
     /*
-     * length Method TEsts
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / length Method TEsts
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void lengthTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0, "a",
+                "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
         int testLength;
@@ -418,7 +667,7 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest();
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0);
         LinkedList<String> exp = this.createFromArgsRef();
         int testLength;
         int expLength;
@@ -443,7 +692,7 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a");
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(0, "a");
         LinkedList<String> exp = this.createFromArgsRef("a");
         int testLength;
         int expLength;
@@ -464,20 +713,20 @@ public abstract class LinkedListTest {
     }
 
     /*
-     * insert Method Tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / insert Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void insertTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
         String insertion = "x";
-        int position = 4;
-        test.moveToPosition(position);
 
         /*
          * Call method under test
@@ -498,11 +747,11 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a");
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a");
         LinkedList<String> exp = this.createFromArgsRef("a");
         String insertion = "x";
-        int position = 0;
-        test.moveToPosition(position);
 
         /*
          * Call method under test
@@ -519,20 +768,21 @@ public abstract class LinkedListTest {
     }
 
     /*
-     * focus Method tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / focus Method tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void focusTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
         String testFocus;
         String expFocus = "d";
-        test.moveToPosition(3);
 
         /*
          * Call method under test
@@ -549,12 +799,15 @@ public abstract class LinkedListTest {
     }
 
     @Test
-    public void focusTest_boundary() {
+    public void focusTest_front() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a");
-        LinkedList<String> exp = this.createFromArgsRef("a");
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
         String testFocus;
         String expFocus = "a";
 
@@ -577,13 +830,39 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 6;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
         String testFocus;
         String expFocus = "g";
-        test.moveToPosition(6);
+
+        /*
+         * Call method under test
+         */
+        testFocus = test.focus();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expFocus, testFocus);
+    }
+
+    @Test
+    public void focusTest_boundary() {
+        /*
+         * Set up variables
+         */
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a");
+        LinkedList<String> exp = this.createFromArgsRef("a");
+        String testFocus;
+        String expFocus = "a";
 
         /*
          * Call method under test
@@ -600,19 +879,20 @@ public abstract class LinkedListTest {
     }
 
     /*
-     * moveToRear Method Tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / moveToRear Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void moveToRearTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
         String rear = exp.peekLast();
-        test.moveToPosition(3);
 
         /*
          * Call method under test
@@ -634,8 +914,37 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a");
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a");
         LinkedList<String> exp = this.createFromArgsRef("a");
+        String rear = exp.peekLast();
+
+        /*
+         * Call method under test
+         */
+        test.moveToRear();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(test.length() - 1, test.position());
+        assertEquals(rear, test.focus());
+    }
+
+    @Test
+    public void moveToRearTest_end() {
+        /*
+         * Set up variables
+         */
+        int position = 6;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
         String rear = exp.peekLast();
 
         /*
@@ -658,15 +967,21 @@ public abstract class LinkedListTest {
      * **********************Secondary Method Tests****************************
      * ************************************************************************
      */
+
+    /*
+     * /////////////////////////////////////////////////////////////////////////
+     * / equals Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void equalsTest_routineTrue() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test1 = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
-        linkedlist.LinkedList<String> test2 = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 3;
+        linkedlist.LinkedList<String> test1 = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        linkedlist.LinkedList<String> test2 = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         boolean test;
         boolean expTest = true;
         int positionBefore = test1.position();
@@ -689,26 +1004,31 @@ public abstract class LinkedListTest {
     }
 
     @Test
-    public void equalsTest_routinefalse() {
+    public void equalsTest_routineFalse() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test1 = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
-        linkedlist.LinkedList<String> test2 = this.createFromArgsTest("a", "b",
-                "c");
+        int position = 3;
+        linkedlist.LinkedList<String> test1 = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        linkedlist.LinkedList<String> test2 = this.createFromArgsTest(position,
+                "a", "b", "c", "XYZ", "e", "f", "g");
         boolean test;
         boolean expTest = false;
+        int positionBefore = test1.position();
+        int positionAfter;
 
         /*
          * Call method under test
          */
         test = test1.equals(test2);
+        positionAfter = test1.position();
 
         /*
          * Compare contents of lists
          */
         assertEquals(expTest, test);
+        assertEquals(positionAfter, positionBefore);
     }
 
     @Test
@@ -716,20 +1036,28 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test1 = this.createFromArgsTest();
-        linkedlist.LinkedList<String> test2 = this.createFromArgsTest();
+        int position = 0;
+        linkedlist.LinkedList<String> test1 = this.createFromArgsTest(position);
+        linkedlist.LinkedList<String> test2 = this.createFromArgsTest(position);
         boolean test;
         boolean expTest = true;
+        int positionBefore = test1.position();
+        int positionAfter;
 
         /*
          * Call method under test
          */
         test = test1.equals(test2);
+        positionAfter = test1.position();
 
         /*
          * Compare contents of lists
          */
+        String[] testContents = this.getContents(test1);
+        String[] expContents = this.getContents(test2);
+        assertArrayEquals(expContents, testContents);
         assertEquals(expTest, test);
+        assertEquals(positionAfter, positionBefore);
     }
 
     @Test
@@ -737,32 +1065,41 @@ public abstract class LinkedListTest {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test1 = this.createFromArgsTest("a");
-        linkedlist.LinkedList<String> test2 = this.createFromArgsTest("b");
+        int position = 0;
+        linkedlist.LinkedList<String> test1 = this.createFromArgsTest(position,
+                "a");
+        linkedlist.LinkedList<String> test2 = this.createFromArgsTest(position,
+                "XYZ");
         boolean test;
         boolean expTest = false;
+        int positionBefore = test1.position();
+        int positionAfter;
 
         /*
          * Call method under test
          */
         test = test1.equals(test2);
+        positionAfter = test1.position();
 
         /*
          * Compare contents of lists
          */
         assertEquals(expTest, test);
+        assertEquals(positionAfter, positionBefore);
     }
 
     /*
-     * toString Method Tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / toString Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void toStringTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
         String testString;
@@ -782,18 +1119,70 @@ public abstract class LinkedListTest {
     }
 
     @Test
-    public void toStringTest_nonZeroPosition() {
+    public void toStringTest_frontPosition() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
         String testString;
         String expString = "<a, b, c, d, e, f, g>";
-        int position = 3;
-        test.moveToPosition(position);
+
+        /*
+         * Call method under test
+         */
+        testString = test.toString();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expString, testString);
+        assertEquals(position, test.position());
+    }
+
+    @Test
+    public void toStringTest_empty() {
+        /*
+         * Set up variables
+         */
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position);
+        LinkedList<String> exp = this.createFromArgsRef();
+        String testString;
+        String expString = "<>";
+
+        /*
+         * Call method under test
+         */
+        testString = test.toString();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expString, testString);
+        assertEquals(position, test.position());
+    }
+
+    @Test
+    public void toStringTest_singleEntry() {
+        /*
+         * Set up variables
+         */
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a");
+        LinkedList<String> exp = this.createFromArgsRef("a");
+        String testString;
+        String expString = "<a>";
 
         /*
          * Call method under test
@@ -811,26 +1200,27 @@ public abstract class LinkedListTest {
     }
 
     /*
-     * removeFront Method Tests
-     */
+     * /////////////////////////////////////////////////////////////////////////
+     * / removeFront Method Tests
+     *//////////////////////////////////////////////////////////////////////////
     @Test
     public void removeFrontTest_routine() {
         /*
          * Set up variables
          */
-        linkedlist.LinkedList<String> test = this.createFromArgsTest("a", "b",
-                "c", "d", "e", "f", "g");
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
         LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
                 "f", "g");
-        String testString;
-        String expString = "<a, b, c, d, e, f, g>";
-        int position = 3;
-        test.moveToPosition(position);
+        String testFront;
+        String expFront;
 
         /*
          * Call method under test
          */
-        testString = test.toString();
+        testFront = test.removeFront();
+        expFront = exp.removeFirst();
 
         /*
          * Compare contents of lists
@@ -838,7 +1228,35 @@ public abstract class LinkedListTest {
         String[] testContents = this.getContents(test);
         String[] expContents = this.getContents(exp);
         assertArrayEquals(expContents, testContents);
-        assertEquals(expString, testString);
+        assertEquals(expFront, testFront);
+        assertEquals(position - 1, test.position());
+    }
+
+    @Test
+    public void removeFrontTest_boundary() {
+        /*
+         * Set up variables
+         */
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a");
+        LinkedList<String> exp = this.createFromArgsRef("a");
+        String testFront;
+        String expFront;
+
+        /*
+         * Call method under test
+         */
+        testFront = test.removeFront();
+        expFront = exp.removeFirst();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expFront, testFront);
         assertEquals(position, test.position());
     }
 }

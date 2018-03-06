@@ -17,9 +17,11 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
      *
      * @return the first entry in {@code this}
      * @updates this
-     * @requires 0 < this.length
-     * @ensures removeFront = [the first entry of #this] and this = #this /
-     *          front
+     * @requires this.length > 0
+     * @ensures <pre>
+     *          removeFront = [the first entry of #this]
+     *          and this = [#this / front]
+     *         </pre>
      */
     T removeFront();
 
@@ -28,8 +30,11 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
      *
      * @return the final entry in {@code this}
      * @updates this
-     * @requires 0 < this.length
-     * @ensures removeFront = [the final entry of #this] and this = #this / rear
+     * @requires this.length > 0
+     * @ensures <pre>
+     *          removeFront = [the final entry of #this]
+     *          and this = #this / rear
+     *          </pre>
      */
     T removeRear();
 
@@ -52,7 +57,8 @@ public interface LinkedList<T> extends LinkedListKernel<T>, Iterable<T> {
      * @param pos
      *            position to which the {@code focus} will shift
      * @requires <pre>
-     *          pos < this.length and 0 <= pos
+     *          pos < this.length and
+     *          pos >= 0
      *          </pre>
      * @ensures this.position = pos
      *
