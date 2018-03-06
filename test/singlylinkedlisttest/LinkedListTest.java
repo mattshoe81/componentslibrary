@@ -962,6 +962,515 @@ public abstract class LinkedListTest {
         assertEquals(rear, test.focus());
     }
 
+    @Test
+    public void positionTest_routine() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.get(expPosition);
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_boundary() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 0;
+        linkedlist.LinkedList<String> test = this
+                .createFromArgsTest(expPosition);
+        LinkedList<String> exp = this.createFromArgsRef();
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition, position);
+    }
+
+    @Test
+    public void positionTest_singleEntry() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 0;
+        linkedlist.LinkedList<String> test = this
+                .createFromArgsTest(expPosition, "a");
+        LinkedList<String> exp = this.createFromArgsRef("a");
+        String expFocus = exp.get(expPosition);
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_end() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 6;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.get(expPosition);
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_retreatThenAdvanceRoutine() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.get(expPosition);
+        test.retreat();
+        test.retreat();
+        test.advance();
+        test.advance();
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_retreatThenAdvanceToEnd() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 5;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.get(expPosition + 1);
+        test.retreat();
+        test.retreat();
+        test.advance();
+        test.advance();
+        test.advance();
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition + 1, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterRemoveRoutine() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "e", "f",
+                "g");
+        String expFocus = exp.get(expPosition);
+        test.remove();
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterRemoveOnFront() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("b", "c", "d", "e", "f",
+                "g");
+        String expFocus = exp.get(expPosition);
+        test.remove();
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterRemoveOnEnd() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 6;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f");
+        String expFocus = exp.get(0);
+        test.remove();
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(0, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterAddToFrontRoutine() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.get(expPosition);
+        String addition = "X";
+        test.addToFront(addition);
+        exp.addFirst(addition);
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition + 1, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterAddToFrontAtFront() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.get(expPosition);
+        String addition = "X";
+        test.addToFront(addition);
+        exp.addFirst(addition);
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition + 1, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterAddToFrontAtEnd() {
+        /*
+         * Set up variables
+         */
+        int expPosition = 6;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(
+                expPosition, "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.get(expPosition);
+        String addition = "X";
+        test.addToFront(addition);
+        exp.addFirst(addition);
+
+        /*
+         * Call method under test
+         */
+        int position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(expPosition + 1, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterMoveToFront() {
+        /*
+         * Set up variables
+         */
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.getFirst();
+        test.moveToFront();
+
+        /*
+         * Call method under test
+         */
+        position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(0, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterMoveToFrontAtFront() {
+        /*
+         * Set up variables
+         */
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.getFirst();
+        test.moveToFront();
+
+        /*
+         * Call method under test
+         */
+        position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(0, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterMoveToFrontAtEnd() {
+        /*
+         * Set up variables
+         */
+        int position = 6;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.getFirst();
+        test.moveToFront();
+
+        /*
+         * Call method under test
+         */
+        position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(0, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterMoveToRear() {
+        /*
+         * Set up variables
+         */
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.getLast();
+        test.moveToRear();
+
+        /*
+         * Call method under test
+         */
+        position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(test.length() - 1, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterMoveToRearAtFront() {
+        /*
+         * Set up variables
+         */
+        int position = 0;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.getLast();
+        test.moveToRear();
+
+        /*
+         * Call method under test
+         */
+        position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(test.length() - 1, position);
+        assertEquals(expFocus, test.focus());
+    }
+
+    @Test
+    public void positionTest_afterMoveToRearAtEnd() {
+        /*
+         * Set up variables
+         */
+        int position = 3;
+        linkedlist.LinkedList<String> test = this.createFromArgsTest(position,
+                "a", "b", "c", "d", "e", "f", "g");
+        LinkedList<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e",
+                "f", "g");
+        String expFocus = exp.getLast();
+        test.moveToRear();
+
+        /*
+         * Call method under test
+         */
+        position = test.position();
+
+        /*
+         * Compare contents of lists
+         */
+        String[] testContents = this.getContents(test);
+        String[] expContents = this.getContents(exp);
+        assertArrayEquals(expContents, testContents);
+        assertEquals(test.length() - 1, position);
+        assertEquals(expFocus, test.focus());
+    }
+
     /*
      * ************************************************************************
      * **********************Secondary Method Tests****************************

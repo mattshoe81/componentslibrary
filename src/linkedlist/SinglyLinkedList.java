@@ -182,6 +182,9 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
         newFront.next = this.preFront.next;
         this.preFront.next = newFront;
         this.length++;
+        if (this.length > 1) {
+            this.position++;
+        }
     }
 
     @Override
@@ -196,8 +199,8 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
             this.preFocus = this.preFront;
         }
 
-        if (this.position == this.length - 1 && this.position != 0) {
-            this.position--;
+        if (this.position == this.length - 1) {
+            this.position = 0;
         }
 
         this.length--;
@@ -224,6 +227,7 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
             Node next = cursor.next;
             cursor = next;
         }
+        this.position--;
     }
 
     @Override
