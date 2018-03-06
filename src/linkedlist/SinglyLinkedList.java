@@ -311,4 +311,25 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
         }
     }
 
+    /***************************************************************************
+     * hashCode overridden here rather than secondary for performance purposes.
+     * *************************************************************************
+     */
+    /**
+     * Note: Opted for a more efficient implementation.
+     */
+    @Override
+    public int hashCode() {
+        int result = 0;
+        int multiplier = 19;
+        Node front = this.preFront;
+        for (int k = 0; k < this.length() && k < 5; k++) {
+            Node next = front.next;
+            result += next.data.hashCode() * multiplier;
+            front = next;
+        }
+
+        return result;
+    }
+
 }

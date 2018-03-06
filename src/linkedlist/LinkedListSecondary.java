@@ -51,10 +51,20 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
         return result;
     }
 
+    /**
+     * Note: Opted for a relatively more efficient implementation.
+     */
     @Override
     public int hashCode() {
         int result = 0;
-        // Hmmm, interesting dilemma
+        int multiplier = 19;
+        int originalPosition = this.position();
+        this.moveToFront();
+        for (int k = 0; k < this.length() && k < 5; k++) {
+            result += this.focus().hashCode() * multiplier;
+            this.advance();
+        }
+        this.moveToPosition(originalPosition);
 
         return result;
     }
