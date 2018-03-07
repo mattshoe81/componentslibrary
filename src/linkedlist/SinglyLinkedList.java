@@ -79,9 +79,14 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
     }
 
     /**
-     * Sentinel node for {@code this}.
+     * Leading Sentinel node for {@code this}.
      */
     private Node preFront;
+
+    /**
+     * Trailing Sentinel node for {@code this}.
+     */
+    private Node postRear;
     /**
      * stores the reference to the value just before this.focus.
      *
@@ -107,10 +112,14 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
      */
     private void createNewRep() {
         this.preFront = new Node();
+        this.postRear = new Node();
+
+        this.preFront.next = this.postRear;
+        this.postRear.next = null;
         this.preFocus = this.preFront;
         this.rear = this.preFront;
         this.length = 0;
-        this.position = 0;
+        this.position = -1;
     }
 
     /**
@@ -133,7 +142,7 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
         @Override
         public boolean hasNext() {
-            return this.cursor.next != null;
+            return this.cursor.next != SinglyLinkedList.this.postRear;
         }
 
         @Override
@@ -170,37 +179,45 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
         this.length++;
         Node newNode = new Node(entry);
-        newNode.next = null;
+        newNode.next = this.postRear;
         this.rear.next = newNode;
         this.rear = newNode;
+
+        if (this.length == 1) {
+            this.position = 0;
+        }
     }
 
     @Override
     public void addToFront(T entry) {
 
+        if (this.preFocus == this.preFront) {
+            Node next = this.preFocus.next;
+            this.preFocus = next;
+        }
+
         Node newFront = new Node(entry);
         newFront.next = this.preFront.next;
         this.preFront.next = newFront;
         this.length++;
-        if (this.length > 1) {
-            this.position++;
-        }
+        this.position++;
     }
 
     @Override
     public T remove() {
         assert this.length > 0 : "Violation of: 0 <= this.length";
 
-        T focusData = this.preFocus.next.data;
-        Node newNext = this.preFocus.next.next;
-        if (newNext != null) {
-            this.preFocus.next = newNext;
-        } else {
-            this.preFocus = this.preFront;
-        }
+        Node preFocus = this.preFocus;
+        Node focus = this.preFocus.next;
+        Node postFocus = focus.next;
 
-        if (this.position == this.length - 1) {
+        T focusData = focus.data;
+        preFocus.next = postFocus;
+
+        if (postFocus == this.postRear) {
             this.position = 0;
+            this.preFocus = this.preFront;
+            this.rear = preFocus;
         }
 
         this.length--;
@@ -219,7 +236,12 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public void retreat() {
-        assert this.position() > 0 : "Violation of: this.position > 0";
+        if (this.length == 0) {
+            assert this.position == -1 : "Violation of: If length = 0, then position = -1";
+        } else {
+            assert this
+                    .position() >= 0 : "Violation of: this.position >= 0 if length > 0";
+        }
 
         int originalPosition = this.position;
         Node cursor = this.preFront;
@@ -227,11 +249,13 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
             Node next = cursor.next;
             cursor = next;
         }
+        this.preFocus = cursor;
         this.position--;
     }
 
     @Override
     public void moveToFront() {
+        assert this.length > 0 : "Violation of: this.length > 0";
         this.preFocus = this.preFront;
         this.position = 0;
     }
@@ -261,7 +285,7 @@ public class SinglyLinkedList<T> extends LinkedListSecondary<T> {
 
     @Override
     public void moveToRear() {
-        assert this.length > 0 : "Violation of: 0 <= this.length";
+        assert this.length > 0 : "Violation of: 0 < this.length";
 
         while (this.preFocus.next != this.rear) {
             this.preFocus = this.preFocus.next;

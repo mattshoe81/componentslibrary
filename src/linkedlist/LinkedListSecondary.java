@@ -81,7 +81,7 @@ public abstract class LinkedListSecondary<T> implements LinkedList<T> {
         int position = this.position();
         this.moveToFront();
         T removeFront = this.remove();
-        if (this.length() > 0) {
+        if (this.length() > 0 && position > 0) {
             this.moveToPosition(position - 1);
         }
 
