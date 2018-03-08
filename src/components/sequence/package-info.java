@@ -1,7 +1,9 @@
 /**
- * Classes and interfaces containing the implementations for a Sequence data structure.
+ * Sequence data structure component family and their implementation.
  */
 /**
+ * Sequence data structure component family and their implementations.
+ *
  * @author Matthew Shoemaker
  *
  */
