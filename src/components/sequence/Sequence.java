@@ -1,5 +1,14 @@
 package components.sequence;
 
+/**
+ * Additional functionality upon the bare-bones functionality afforded by the
+ * {@code SequenceKernel} interface. All method implementations must, by design,
+ * use only the SequenceKernel methods to perform operations on the component.
+ * 
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public interface Sequence<T> extends SequenceKernel<T>, Iterable<T> {
 
     /**

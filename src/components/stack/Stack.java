@@ -1,5 +1,14 @@
 package components.stack;
 
+/**
+ * Additional functionality upon the bare-bones functionality afforded by the
+ * {@code StackKernel} interface. All method implementations must, by design,
+ * use only the StackKernel methods to perform operations on the component.
+ * 
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public interface Stack<T> extends StackKernel<T>, Iterable<T> {
 
     /**
@@ -12,7 +21,7 @@ public interface Stack<T> extends StackKernel<T>, Iterable<T> {
 
     /**
      * Replaces the entry at the top of {@code this} with {@code entry}
-     * 
+     *
      * @param entry
      *            new top of the stack
      * @return the top of {@code #this}
@@ -37,7 +46,7 @@ public interface Stack<T> extends StackKernel<T>, Iterable<T> {
 
     /**
      * Returns a reference to, but does not remove, the top of {@code this}.
-     * 
+     *
      * @return a reference to the top of the stack
      * @requires this.size > 0
      * @ensures top = [the top of #this]

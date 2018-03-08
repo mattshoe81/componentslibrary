@@ -1,5 +1,14 @@
 package components.stack;
 
+/**
+ * Abstract class providing the implementation of all of the layered secondary
+ * methods that were defined in the Stack interface, as well as the
+ * implementation for equals, toString, and hashCode methods.
+ *
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public abstract class StackSecondary<T> implements Stack<T> {
 
     @SuppressWarnings("unchecked")

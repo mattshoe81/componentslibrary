@@ -9,6 +9,9 @@ import java.util.Comparator;
 import components.linkedlist.DoublyLinkedList;
 
 /**
+ * Abstract class providing the implementation of all of the layered secondary
+ * methods that were defined in the Queue interface, as well as the
+ * implementation for equals, toString, and hashCode methods.
  *
  * @author Matthew Shoemaker
  *

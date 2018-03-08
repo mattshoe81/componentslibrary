@@ -1,5 +1,14 @@
 package components.sequence;
 
+/**
+ * Abstract class providing the implementation of all of the layered secondary
+ * methods that were defined in the Sequence interface, as well as the
+ * implementation for equals, toString, and hashCode methods.
+ * 
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public abstract class SequenceSecondary<T> implements Sequence<T> {
 
     @SuppressWarnings("unchecked")

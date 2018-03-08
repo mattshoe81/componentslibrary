@@ -7,7 +7,9 @@ import java.util.Collection;
 import java.util.Comparator;
 
 /**
- * Interace containing method contracts for secondary methods.
+ * Additional functionality upon the bare-bones functionality afforded by the
+ * {@code QueueKernel} interface. All method implementations must, by design,
+ * use only the QueueKernel methods to perform operations on the component.
  *
  * @author Matthew Shoemaker
  *
@@ -47,7 +49,7 @@ public interface Queue<T> extends QueueKernel<T>, Iterable<T> {
     /**
      * Sorts the entries in {@code this} according to the order provided by
      * {@code comparator}.
-     * 
+     *
      * @param comparator
      *            ordering to be imposed on #this
      * @updates this
@@ -59,7 +61,7 @@ public interface Queue<T> extends QueueKernel<T>, Iterable<T> {
 
     /**
      * Reports whether {@code entry} is in {@code this}.
-     * 
+     *
      * @param entry
      *            entry to be looked for
      * @return [entry is in #this]

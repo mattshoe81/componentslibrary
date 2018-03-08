@@ -2,6 +2,16 @@ package components.stack;
 
 import components.standard.Standard;
 
+/**
+ * {@code Stack} kernel component containing method headers and contracts for
+ * all methods that will directly interact with the data representations of all
+ * Stack implementations. All sub-interface methods should use only these
+ * methods to perform operations on the {@code Stack}.
+ *
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public interface StackKernel<T> extends Standard<Stack<T>> {
 
     /**
@@ -16,7 +26,7 @@ public interface StackKernel<T> extends Standard<Stack<T>> {
 
     /**
      * Removes the top of the stack and returns it.
-     * 
+     *
      * @return top of the stack
      * @requires this.size > 0
      * @ensures <pre>

@@ -2,6 +2,16 @@ package components.sequence;
 
 import components.standard.Standard;
 
+/**
+ * {@code Sequence} kernel component containing method headers and contracts for
+ * all methods that will directly interact with the data representations of all
+ * Sequence implementations. All sub-interface methods should use only these
+ * methods to perform operations on the {@code Sequence}.
+ *
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public interface SequenceKernel<T> extends Standard<Sequence<T>> {
 
     /**
@@ -37,7 +47,7 @@ public interface SequenceKernel<T> extends Standard<Sequence<T>> {
 
     /**
      * Reports the length of {@code this}.
-     * 
+     *
      * @return |this|
      * @ensures length = [|this|]
      */
