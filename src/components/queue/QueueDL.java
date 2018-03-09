@@ -4,7 +4,6 @@
 package components.queue;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import components.linkedlist.DoublyLinkedList;
 
@@ -89,42 +88,6 @@ public class QueueDL<T> extends QueueSecondary<T> {
     public Iterator<T> iterator() {
 
         return this.rep.iterator();
-    }
-
-    /**
-     * Iterator class for {@code this}.
-     *
-     */
-    private class QueueDLIterator implements Iterator<T> {
-
-        /**
-         * Reference to the current value in the iteration.
-         */
-        private Queue<T> temp;
-
-        /**
-         * Constructor to initialize the cursor to the front of this list.
-         */
-        QueueDLIterator() {
-            this.temp = QueueDL.this.newInstance();
-        }
-
-        @Override
-        public boolean hasNext() {
-            return this.temp.length() > 0;
-        }
-
-        @Override
-        public T next() {
-            if (this.hasNext()) {
-                T entry = QueueDL.this.dequeue();
-                this.temp.enqueue(entry);
-                return entry;
-            } else {
-                QueueDL.this.transferFrom(this.temp);
-            }
-            throw new NoSuchElementException();
-        }
     }
 
 }
