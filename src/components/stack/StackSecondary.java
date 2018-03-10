@@ -51,8 +51,20 @@ public abstract class StackSecondary<T> implements Stack<T> {
 
     @Override
     public int hashCode() {
-        // TODO
-        return 0;
+        int result = 0;
+        T pop;
+        Stack<T> temp = this.newInstance();
+        for (int k = 0; k < this.size() && k < 5; k++) {
+            pop = this.pop();
+            result *= pop.hashCode();
+            temp.push(pop);
+        }
+
+        while (temp.size() > 0) {
+            this.push(temp.pop());
+        }
+
+        return result;
     }
 
     @Override

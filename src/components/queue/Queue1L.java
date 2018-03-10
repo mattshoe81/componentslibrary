@@ -11,7 +11,7 @@ import java.util.Iterator;
  *            Generic type of this
  *
  * @correspondence this = [entries($this.rep) in their natural order]
- * 
+ *
  */
 public class Queue1L<T> extends QueueSecondary<T> {
 
@@ -43,11 +43,15 @@ public class Queue1L<T> extends QueueSecondary<T> {
 
     @Override
     public T front() {
+        assert this.rep.size() > 0 : "Violation of: this.length > 0";
+
         return this.rep.peekFirst();
     }
 
     @Override
     public T replaceFront(T entry) {
+        assert this.rep.size() > 0 : "Violation of: #this.length > 0";
+
         T front = this.rep.removeFirst();
         this.rep.addFirst(entry);
         return front;
@@ -56,7 +60,6 @@ public class Queue1L<T> extends QueueSecondary<T> {
     @Override
     public void clear() {
         this.createNewRep();
-
     }
 
     @Override

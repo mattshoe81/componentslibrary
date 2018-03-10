@@ -11,4 +11,7 @@ import components.standard.Standard;
  */
 public interface MatrixKernel<T> extends Standard<Matrix<T>> {
 
+    public T setEntry(T entry, int row, int column);
+
+    public T entry(int row, int column);
 }

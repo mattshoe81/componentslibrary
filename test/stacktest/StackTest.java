@@ -184,6 +184,18 @@ public abstract class StackTest {
         assertEquals(exp, test);
     }
 
+    @Test
+    public void hashCodeTest_routine() {
+        Stack<String> test = this.createFromArgsTest("a", "b", "c", "d", "e",
+                "f", "g");
+        Stack<String> exp = this.createFromArgsRef("g", "f", "e", "d", "c", "b",
+                "a");
+
+        int hashCode = test.hashCode();
+
+        assertEquals(exp, test);
+    }
+
 }
 
 //

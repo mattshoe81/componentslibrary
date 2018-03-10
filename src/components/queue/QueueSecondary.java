@@ -34,6 +34,8 @@ public abstract class QueueSecondary<T> implements Queue<T> {
 
     @Override
     public void append(Collection<T> collection) {
+        assert collection != null : "Violation of: collection is not null";
+
         for (T entry : collection) {
             this.enqueue(entry);
         }
@@ -41,6 +43,8 @@ public abstract class QueueSecondary<T> implements Queue<T> {
 
     @Override
     public void append(Queue<T> collection) {
+        assert collection != null : "Violation of: collection is not null";
+
         for (T entry : collection) {
             this.enqueue(entry);
         }
@@ -48,7 +52,25 @@ public abstract class QueueSecondary<T> implements Queue<T> {
 
     @Override
     public void sort(Comparator<T> comparator) {
+        assert comparator != null : "Violation of: collection is not null";
 
+        Queue<T> temp = this.newInstance();
+        temp.transferFrom(this);
+        while (temp.length() > 0) {
+            T entry = temp.dequeue();
+            if (temp.length() > 0) {
+                if (comparator.compare(entry, temp.front()) < 0) {
+                    this.enqueue(entry);
+                } else if (comparator.compare(entry, temp.front()) > 0) {
+                    temp.enqueue(entry);
+                } else {
+                    this.enqueue(entry);
+                }
+            } else {
+                this.enqueue(entry);
+            }
+
+        }
     }
 
     @Override
@@ -101,6 +123,13 @@ public abstract class QueueSecondary<T> implements Queue<T> {
         toString += ">";
 
         return toString;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.front().hashCode() * 19;
+
+        return result;
     }
 
 }

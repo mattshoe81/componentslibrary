@@ -48,6 +48,8 @@ public class QueueDL<T> extends QueueSecondary<T> {
 
     @Override
     public T front() {
+        assert this.rep.length() > 0 : "Violation of: this.length > 0";
+
         this.rep.moveToFront();
         T front = this.rep.focus();
         return front;
@@ -55,6 +57,7 @@ public class QueueDL<T> extends QueueSecondary<T> {
 
     @Override
     public T replaceFront(T entry) {
+        assert this.rep.length() > 0 : "Violation of: #this.length > 0";
         T front = this.rep.removeFront();
         this.rep.addToFront(entry);
         this.rep.moveToFront();

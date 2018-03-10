@@ -2,6 +2,8 @@ package queuetest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Comparator;
+
 import org.junit.Test;
 
 import components.queue.Queue;
@@ -312,6 +314,108 @@ public abstract class QueueTest {
         /*
          * Compare contents
          */
+        assertEquals(exp, test);
+    }
+
+    /***************************************************************************
+     * sort Tests
+     */
+    @Test
+    public void sortTest_routine() {
+        /*
+         * Set up variables
+         */
+        Queue<String> test = this.createFromArgsTest("d", "b", "e", "a", "c");
+        Queue<String> ref = this.createFromArgsRef("d", "b", "e", "a", "c");
+        Comparator<String> comp = String.CASE_INSENSITIVE_ORDER;
+        Queue<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e");
+
+        /*
+         * Call method under test
+         */
+        test.sort(comp);
+        exp.sort(comp);
+        ;
+
+        /*
+         * Compare contents
+         */
+        assertEquals(ref, test);
+        assertEquals(exp, test);
+    }
+
+    @Test
+    public void sortTest_boundary() {
+        /*
+         * Set up variables
+         */
+        Queue<String> test = this.createFromArgsTest();
+        Queue<String> ref = this.createFromArgsRef();
+        Comparator<String> comp = String.CASE_INSENSITIVE_ORDER;
+        Queue<String> exp = this.createFromArgsRef();
+
+        /*
+         * Call method under test
+         */
+        test.sort(comp);
+        exp.sort(comp);
+        ;
+
+        /*
+         * Compare contents
+         */
+        assertEquals(ref, test);
+        assertEquals(exp, test);
+    }
+
+    @Test
+    public void sortTest_routinePerm() {
+        /*
+         * Set up variables
+         */
+        Queue<String> test = this.createFromArgsTest("c", "b", "e", "d", "a");
+        Queue<String> ref = this.createFromArgsRef("c", "b", "e", "d", "a");
+        Comparator<String> comp = String.CASE_INSENSITIVE_ORDER;
+        Queue<String> exp = this.createFromArgsRef("a", "b", "c", "d", "e");
+
+        /*
+         * Call method under test
+         */
+        test.sort(comp);
+        exp.sort(comp);
+        ;
+
+        /*
+         * Compare contents
+         */
+        assertEquals(ref, test);
+        assertEquals(exp, test);
+    }
+
+    @Test
+    public void sortTest_routineDuplicates() {
+        /*
+         * Set up variables
+         */
+        Queue<String> test = this.createFromArgsTest("c", "b", "b", "e", "d",
+                "a");
+        Queue<String> ref = this.createFromArgsRef("c", "b", "b", "e", "d",
+                "a");
+        Comparator<String> comp = String.CASE_INSENSITIVE_ORDER;
+        Queue<String> exp = this.createFromArgsRef("a", "b", "b", "c", "d",
+                "e");
+
+        /*
+         * Call method under test
+         */
+        test.sort(comp);
+        exp.sort(comp);
+        ;
+
+        /*
+         * Compare contents
+         */
+        assertEquals(ref, test);
         assertEquals(exp, test);
     }
 
