@@ -2,6 +2,11 @@ package components.binarytree;
 
 public final class BinaryTreeUtility {
 
+    /**
+     *
+     * @param str
+     * @return
+     */
     public static BinaryTree<String> treeFromString(String str) {
         String root;
         String treeString = str;

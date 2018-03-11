@@ -2,7 +2,7 @@
  *
  */
 /**
- * Set label structure component family and their implementations.
+ * Set data structure component family and their implementations.
  *
  * @author Matthew Shoemaker
  *

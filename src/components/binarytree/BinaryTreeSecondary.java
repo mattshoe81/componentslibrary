@@ -1,5 +1,15 @@
 package components.binarytree;
 
+/**
+ * Abstract class providing the implementation of all of the layered secondary
+ * methods that were defined in the {@code BinaryTree} interface, as well as the
+ * implementation for {@code equals}, {@code toString}, and {@code hashCode}
+ * methods.
+ *
+ * @author Matthew Shoemaker
+ *
+ * @param <T>
+ */
 public abstract class BinaryTreeSecondary<T> implements BinaryTree<T> {
 
     @Override
@@ -41,7 +51,7 @@ public abstract class BinaryTreeSecondary<T> implements BinaryTree<T> {
             if (right.size() > 0) {
                 rightString = "(" + treeToString(right) + ")";
             }
-            // Concatenate the represenations together
+            // Concatenate the representations together
             result += root.toString() + leftString + rightString;
 
             // Restore tree
@@ -49,34 +59,6 @@ public abstract class BinaryTreeSecondary<T> implements BinaryTree<T> {
         }
 
         return result;
-    }
-
-    @Override
-    public int height() {
-        int height = 1;
-
-        if (this.size() > 0) {
-            BinaryTree<T> left = this.leftSubtree();
-            BinaryTree<T> right = this.rightSubtree();
-            T root = this.root();
-            int leftHeight = 0;
-            int rightHeight = 0;
-            if (left.size() > 0) {
-                leftHeight = left.height();
-            }
-            if (right.size() > 0) {
-                rightHeight = right.height();
-            }
-
-            if (leftHeight > rightHeight) {
-                height += leftHeight;
-            } else {
-                height += rightHeight;
-            }
-
-            this.build(root, left, right);
-        }
-        return height;
     }
 
     @Override
