@@ -2,7 +2,7 @@
  *
  */
 /**
- * Set data structure component family and their implementations.
+ * {@code Set} data structure component family and their implementations.
  *
  * @author Matthew Shoemaker
  *

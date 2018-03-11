@@ -2,7 +2,7 @@
  * Sequence label structure component family and their implementation.
  */
 /**
- * Sequence data structure component family and their implementations.
+ * {@code Sequence} data structure component family and their implementations.
  *
  * @author Matthew Shoemaker
  *
