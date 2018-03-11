@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  *      [$this.position = -1 if $this.length = 0]
  *      [$this.position = distance of this.focus from $this.preFront]
  *      [$this.preFocus points to the node just before the
- *          node containing the data that is in focus to
+ *          node containing the label that is in focus to
  *          the client if ($this.length > 0) and points to
  *          $this.preFront if $this.length = 0]
  *      [$this.preFront points to the leading sentinel node]
@@ -24,7 +24,7 @@ import java.util.NoSuchElementException;
  *      [$this.length = total number of nodes minus 2 for the sentinel nodes]
  *  </pre>
  * @correspondence <pre>
- *      this = [data in nodes between, and not including, $this.preFront and $this.postRear]
+ *      this = [label in nodes between, and not including, $this.preFront and $this.postRear]
  *      focus = [this.preFocus.next]
  *  </pre>
  *
@@ -44,7 +44,7 @@ public class DoublyLinkedList<T> extends LinkedListSecondary<T> {
      */
     private class Node {
         /**
-         * The data stored in the node.
+         * The label stored in the node.
          */
         T data;
         /**
@@ -57,7 +57,7 @@ public class DoublyLinkedList<T> extends LinkedListSecondary<T> {
         Node previous;
 
         /**
-         * No-arg constructor initializes data and next to null.
+         * No-arg constructor initializes label and next to null.
          */
         Node() {
             this.data = null;
@@ -66,9 +66,9 @@ public class DoublyLinkedList<T> extends LinkedListSecondary<T> {
         }
 
         /**
-         * Constructor that accept the data value for the node.
+         * Constructor that accept the label value for the node.
          *
-         * @param data
+         * @param label
          *            this.data
          */
         Node(T data) {
@@ -105,7 +105,7 @@ public class DoublyLinkedList<T> extends LinkedListSecondary<T> {
     private int position;
 
     /**
-     * Single point of control over change for the construction of a new data
+     * Single point of control over change for the construction of a new label
      * representation. Initializes this to its initial value.
      */
     private void createNewRep() {

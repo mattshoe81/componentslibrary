@@ -4,7 +4,7 @@ import components.standard.Standard;
 
 /**
  * {@code LinkedList} kernel component containing method headers and contracts
- * for all methods that will directly interact with the data representations of
+ * for all methods that will directly interact with the label representations of
  * all LinkedList implementations. All sub-interface methods should use only
  * these methods to perform operations on the {@code LinkedList}.
  *

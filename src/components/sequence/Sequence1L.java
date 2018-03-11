@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * A sequence data structure layered on top of a java.util.ArrayList.
+ * A sequence label structure layered on top of a java.util.ArrayList.
  *
  * @author Matthew Shoemaker
  *

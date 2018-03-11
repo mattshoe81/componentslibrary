@@ -5,7 +5,7 @@ import java.util.Iterator;
 import components.linkedlist.DoublyLinkedList;
 
 /**
- * An implementation of a Sequence data structure layered on the
+ * An implementation of a Sequence label structure layered on the
  * DoublyLinkedList component.
  *
  * @author Matthew Shoemaker

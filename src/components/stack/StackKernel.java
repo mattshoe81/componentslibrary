@@ -4,7 +4,7 @@ import components.standard.Standard;
 
 /**
  * {@code Stack} kernel component containing method headers and contracts for
- * all methods that will directly interact with the data representations of all
+ * all methods that will directly interact with the label representations of all
  * Stack implementations. All sub-interface methods should use only these
  * methods to perform operations on the {@code Stack}.
  *
