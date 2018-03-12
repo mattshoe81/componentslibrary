@@ -17,6 +17,42 @@ public abstract class BinaryTreeSecondary<T> implements BinaryTree<T> {
         return treeToString(this);
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean equals(Object o) {
+        boolean equals = false;
+        if (o instanceof BinaryTreeNL) {
+            BinaryTreeNL<T> local = (BinaryTreeNL<T>) o;
+            if (local.size() == this.size()) {
+                if (local.size() == 0) {
+                    equals = true;
+                } else {
+                    if (local.height() == this.height()) {
+                        if (local.root().equals(this.root())) {
+                            equals = true;
+                            if (local.size() > 1) {
+                                BinaryTree<T> leftLocal = local.leftSubtree();
+                                BinaryTree<T> rightLocal = local.rightSubtree();
+                                T rootLocal = local.root();
+                                BinaryTree<T> leftThis = this.leftSubtree();
+                                BinaryTree<T> rightThis = this.rightSubtree();
+                                T rootThis = this.root();
+                                equals = leftLocal.equals(leftThis);
+                                if (equals) {
+                                    equals = rightLocal.equals(rightThis);
+                                }
+                                this.build(rootThis, leftThis, rightThis);
+                                local.build(rootLocal, leftLocal, rightLocal);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return equals;
+    }
+
     /**
      * Returns the {@code String} prefix representation of the given
      * {@code BinaryTree<T>}.
@@ -73,62 +109,54 @@ public abstract class BinaryTreeSecondary<T> implements BinaryTree<T> {
     }
 
     @Override
-    public void remove(T node) {
-        assert this.contains(node) : "Violation of: node is in this";
-
-        BinaryTree<T> left = this.leftSubtree();
-        BinaryTree<T> right = this.rightSubtree();
-        T root = this.root();
-
-        if (root.equals(node)) {
-            root = this.removeBottomLeft(right);
-        } else {
-            if (left.contains(node)) {
-                left.remove(node);
-            } else {
-                right.remove(node);
-            }
-        }
-
-        this.build(root, left, right);
-    }
-
-    @Override
     public boolean contains(T node) {
         boolean contains = false;
-        BinaryTree<T> left = this.leftSubtree();
-        BinaryTree<T> right = this.rightSubtree();
-        T root = this.root();
-        if (root.equals(node)) {
-            contains = true;
-        } else {
-            if (left.size() > 0) {
-                contains = left.contains(node);
-            }
-            if (!contains && right.size() > 0) {
-                contains = right.contains(node);
+        if (this.size() > 0) {
+            T root = this.root();
+            if (root.equals(node)) {
+                contains = true;
+            } else {
+
+                BinaryTree<T> left = this.leftSubtree();
+                BinaryTree<T> right = this.rightSubtree();
+                if (left.size() > 0) {
+                    contains = left.contains(node);
+                }
+                if (!contains && right.size() > 0) {
+                    contains = right.contains(node);
+                }
+
+                this.build(root, left, right);
             }
         }
 
         return contains;
     }
 
-    private T removeBottomLeft(BinaryTree<T> tree) {
-        T bottomLeft;
-        BinaryTree<T> left = tree.leftSubtree();
-        BinaryTree<T> right = tree.rightSubtree();
-        T root = tree.root();
-        bottomLeft = root;
+    @Override
+    public void remove(T node) {
+        BinaryTree<T> left = this.leftSubtree();
+        BinaryTree<T> right = this.rightSubtree();
+        T root = this.root();
 
-        if (left.size() == 1) {
-            bottomLeft = left.root();
-            tree.build(root, tree.newInstance(), right);
+        if (root.equals(node)) {
+            if (right.size() > 0) {
+                root = BinaryTreeUtility.removeLeftMost(right);
+                this.build(root, left, right);
+            } else if (left.size() > 0) {
+                root = BinaryTreeUtility.removeRightMost(left);
+                this.build(root, left, right);
+            } else {
+                this.clear();
+            }
         } else {
-            bottomLeft = this.removeBottomLeft(left);
-            tree.build(root, left, right);
+            if (left.contains(node)) {
+                left.remove(node);
+            } else {
+                right.remove(node);
+            }
+            this.build(root, left, right);
         }
-
-        return bottomLeft;
     }
 
 }

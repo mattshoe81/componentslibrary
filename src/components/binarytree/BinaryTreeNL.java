@@ -44,6 +44,8 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
 
         BinaryTreeNL<T> localLeft = (BinaryTreeNL<T>) left;
         BinaryTreeNL<T> localRight = (BinaryTreeNL<T>) right;
+
+        this.size = 1 + localLeft.size + localRight.size;
         if (localLeft.height > localRight.height) {
             this.height = 1 + localLeft.height;
         } else {
@@ -58,22 +60,31 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
             this.right = new BinaryTreeNL<T>();
         }
         this.right.transferFrom(localRight);
-
-        this.size = 1 + localLeft.size + localRight.size;
     }
 
     @Override
-    public BinaryTree<T> leftSubtree() {
-        BinaryTree<T> localLeft = this.newInstance();
+    public BinaryTreeNL<T> leftSubtree() {
+        BinaryTreeNL<T> localLeft = this.newInstance();
         localLeft.transferFrom(this.left);
+        if (this.root != null) {
+            this.height = this.right.height + 1;
+        } else {
+            this.height = 0;
+        }
 
         return localLeft;
     }
 
     @Override
-    public BinaryTree<T> rightSubtree() {
-        BinaryTree<T> localRight = this.newInstance();
+    public BinaryTreeNL<T> rightSubtree() {
+        BinaryTreeNL<T> localRight = this.newInstance();
         localRight.transferFrom(this.right);
+        if (this.root != null) {
+            this.height = this.right.height + 1;
+        } else {
+            this.height = 0;
+        }
+
         return localRight;
     }
 
@@ -100,6 +111,7 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
         this.right = localSource.right;
         this.root = localSource.root;
         this.size = localSource.size;
+        this.height = localSource.height;
         localSource.createNewRep();
     }
 

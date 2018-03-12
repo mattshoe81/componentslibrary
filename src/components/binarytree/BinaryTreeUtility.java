@@ -65,4 +65,86 @@ public final class BinaryTreeUtility {
 
         return newTree;
     }
+
+    /**
+     * Removes and returns the smallest (left-most) label in {@code t}.
+     *
+     * @param <T>
+     *            type of {@code BinaryTree} labels
+     * @param t
+     *            the {@code BinaryTree} from which to remove the label
+     * @return the smallest label in the given {@code BinaryTree}
+     * @updates t
+     * @requires IS_BST(t) and |t| > 0
+     * @ensures <pre>
+     * IS_BST(t)  and  removeSmallest = [the smallest label in #t]  and
+     *  labels(t) = labels(#t) \ {removeSmallest}
+     * </pre>
+     */
+    public static <T> T removeLeftMost(BinaryTree<T> t) {
+        assert t != null : "Violation of: t is not null";
+
+        // Declare/initialize left/right BT to hold t's subtrees, respectively,
+        // then disassemble
+        BinaryTree<T> left = t.leftSubtree();
+        BinaryTree<T> right = t.rightSubtree();
+        T root = t.root();
+
+        // Set smallest to current root
+        T leftMost = root;
+
+        // If left subtree isn't the empty subtree then the current root is not
+        // the smallest, recursively enter into left subtree, else current root
+        // is smallest - transfer right subtree to t
+        if (left.size() > 0) {
+            leftMost = removeLeftMost(left);
+            t.build(root, left, right);
+        } else {
+            t.transferFrom(right);
+        }
+
+        // Return smallest
+        return leftMost;
+    }
+
+    /**
+     * Removes and returns the smallest (left-most) label in {@code t}.
+     *
+     * @param <T>
+     *            type of {@code BinaryTree} labels
+     * @param t
+     *            the {@code BinaryTree} from which to remove the label
+     * @return the smallest label in the given {@code BinaryTree}
+     * @updates t
+     * @requires IS_BST(t) and |t| > 0
+     * @ensures <pre>
+     * IS_BST(t)  and  removeSmallest = [the smallest label in #t]  and
+     *  labels(t) = labels(#t) \ {removeSmallest}
+     * </pre>
+     */
+    public static <T> T removeRightMost(BinaryTree<T> t) {
+        assert t != null : "Violation of: t is not null";
+
+        // Declare/initialize left/right BT to hold t's subtrees, respectively,
+        // then disassemble
+        BinaryTree<T> left = t.leftSubtree();
+        BinaryTree<T> right = t.rightSubtree();
+        T root = t.root();
+
+        // Set smallest to current root
+        T rightMost = root;
+
+        // If left subtree isn't the empty subtree then the current root is not
+        // the smallest, recursively enter into left subtree, else current root
+        // is smallest - transfer right subtree to t
+        if (right.size() > 0) {
+            rightMost = removeRightMost(right);
+            t.build(root, left, right);
+        } else {
+            t.transferFrom(left);
+        }
+
+        // Return smallest
+        return rightMost;
+    }
 }
