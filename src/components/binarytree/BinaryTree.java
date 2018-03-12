@@ -13,7 +13,7 @@ package components.binarytree;
 public interface BinaryTree<T> extends BinaryTreeKernel<T> {
 
     /**
-     * Swaps {@code #this.root} with {@code replacement} and returns the
+     * Swaps {@code #this.root} with {@code replacement} and returns
      * {@code #this.root}.
      *
      * @param replacement
@@ -49,7 +49,7 @@ public interface BinaryTree<T> extends BinaryTreeKernel<T> {
     public void remove(T node);
 
     /**
-     * Reports whether (@code node} is in {@code this}.
+     * Reports whether {@code node} is in {@code this}.
      *
      * @param node
      *            node to search for

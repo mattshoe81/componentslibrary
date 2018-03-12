@@ -15,18 +15,25 @@ import components.standard.Standard;
 public interface BinaryTreeKernel<T> extends Standard<BinaryTree<T>> {
 
     /**
-     * Builds {@code this} into a Binary Tree with {@code root) as the root of
+     * Builds {@code this} into a Binary Tree with {@code root} as the root of
      * the tree, {@code left} as the left subtree of {@code this}, and {@code
      * right} as the right subtree of {@code this}.
      *
-     * @param root the new root of {@code this}
+     * @param root
+     *            the new root of {@code this}
      *
      * @param left
      *            the new left subtree of {@code this}
      * @param right
      *            the new right subtree of {@code this}
      * @replaces this
-     * @requires [left is not null] and [right is not null]
+     * @requires <pre>
+     * [left is not null] and
+     * [right is not null] and
+     * [left != right] and
+     * [left != this] and
+     * [right != this]
+     * </pre>
      * @ensures this = [binary tree with {@code root} at its root node,
      *          {@code left} as the left subtree of {@code this}, and
      *          {@code right} as the right subtree of {@code this}]
@@ -37,8 +44,8 @@ public interface BinaryTreeKernel<T> extends Standard<BinaryTree<T>> {
      * Removes the left subtree from {@code this} and returns it.
      *
      * @return this.left
-     * @clears this.left
-     * @ensures leftSubtree = [this.left]
+     * @clears #this.left
+     * @ensures leftSubtree = #this.left
      */
     public BinaryTree<T> leftSubtree();
 
@@ -46,8 +53,8 @@ public interface BinaryTreeKernel<T> extends Standard<BinaryTree<T>> {
      * Removes the right subtree from {@code this} and returns it.
      *
      * @return this.right
-     * @clears this.right
-     * @ensures rightSubtree = [this.right]
+     * @clears #this.right
+     * @ensures rightSubtree = #this.right
      */
     public BinaryTree<T> rightSubtree();
 
