@@ -82,4 +82,12 @@ public interface BinaryTreeKernel<T> extends Standard<BinaryTree<T>> {
      * @ensures height = [height of {@code this}]
      */
     int height();
+
+    /**
+     * Returns the balance factor of {@code this}.
+     *
+     * @return the difference in height between the left and right subtrees
+     * @ensures balanceFactor = this.left.height - this.right.height
+     */
+    public int balanceFactor();
 }

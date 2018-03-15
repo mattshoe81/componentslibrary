@@ -16,8 +16,10 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
     private T root;
     private int size;
     private int height;
+    private int balanceFactor;
 
     private void createNewRep() {
+        this.balanceFactor = 0;
         this.size = 0;
         this.height = 0;
         this.left = null;
@@ -44,6 +46,8 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
 
         BinaryTreeNL<T> localLeft = (BinaryTreeNL<T>) left;
         BinaryTreeNL<T> localRight = (BinaryTreeNL<T>) right;
+        int leftHeight = localLeft.height;
+        int rightHeight = localRight.height;
 
         this.size = 1 + localLeft.size + localRight.size;
         if (localLeft.height > localRight.height) {
@@ -60,6 +64,8 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
             this.right = new BinaryTreeNL<T>();
         }
         this.right.transferFrom(localRight);
+
+        this.balanceFactor = leftHeight - rightHeight;
     }
 
     @Override
@@ -68,8 +74,10 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
         localLeft.transferFrom(this.left);
         if (this.root != null) {
             this.height = this.right.height + 1;
+            this.balanceFactor = 0 - this.right.height;
         } else {
             this.height = 0;
+            this.balanceFactor = 0;
         }
 
         return localLeft;
@@ -81,8 +89,10 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
         localRight.transferFrom(this.right);
         if (this.root != null) {
             this.height = this.right.height + 1;
+            this.balanceFactor = this.left.height;
         } else {
             this.height = 0;
+            this.balanceFactor = 0;
         }
 
         return localRight;
@@ -112,6 +122,7 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
         this.root = localSource.root;
         this.size = localSource.size;
         this.height = localSource.height;
+        this.balanceFactor = localSource.balanceFactor;
         localSource.createNewRep();
     }
 
