@@ -124,6 +124,7 @@ public class BinaryTreeNL<T> extends BinaryTreeSecondary<T> {
         this.height = localSource.height;
         this.balanceFactor = localSource.balanceFactor;
         localSource.createNewRep();
+        System.out.
     }
 
     @SuppressWarnings("unchecked")

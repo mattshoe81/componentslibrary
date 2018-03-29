@@ -25,6 +25,11 @@ public class BinarySearchTreeSB<T extends Comparable<T>>
     }
 
     private void rightRotation(BinaryTree<T> tree) {
+        BinaryTree<T> left = tree.leftSubtree();
+        BinaryTree<T> right = tree.rightSubtree();
+        T root = tree.root();
+
+        tree.transferFrom(left);
 
     }
 
